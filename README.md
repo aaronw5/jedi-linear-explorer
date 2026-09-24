@@ -1,5 +1,7 @@
 # What is the tiny trigger tagger doing?
 
+**Open the explorer: https://aaronw5.github.io/jedi-linear-explorer/** (N = 8: `/n8/`, N = 64: `/n64/`). Pages are large (tens of MB); give them a few seconds.
+
 Interactive interpretability explorer for the quantized JEDI-linear jet tagger (3 features per particle), for N = 8 and N = 64 particles.
 
 Open `index.html` (or the GitHub Pages site). Each page has:

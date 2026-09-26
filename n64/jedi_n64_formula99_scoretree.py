@@ -13,7 +13,7 @@ Output: the class (g, q, W, Z or t).
                  Grown on the entire training set (595,000 jets), each jet labelled with the formula's class;
                  each leaf notes the share of its training jets that the formula puts in its class.
 
-Test set (50,000 jets): accuracy 80.47% (the formula: 80.45%); same class as the formula for 97.76% of jets.  221 leaves, depth 17.
+Test set (50,000 jets): accuracy 80.24% (the formula: 80.45%); same class as the formula for 95.82% of jets.  48 leaves, depth 11.
 """
 
 import math
@@ -110,477 +110,342 @@ def quantities(pt, eta, phi):
 
 
 def score_g(Q):
-    return (-0.5284
-        - 0.8767 * max(0.0, 0.057 - Q.girth)
-        + 58.8 * max(0.0, 0.0062 - Q.girth2_top20)
-        + 92.14 * max(0.0, 0.0058 - Q.lam1)
-        + 0.1231 * max(0.0, Q.mass - 80.4)
-        + 0.04221 * max(0.0, Q.mass - 91.2)
-        - 214.0 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
-        - 0.01807 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
-        + 228.9 * max(0.0, 0.0021 - Q.girth2_top20)
-        - 13.32 * max(0.0, Q.log_sum_pt - 6.8)
-        + 34.81 * max(0.0, Q.log_sum_pt - 6.9)
-        - 14.97 * max(0.0, Q.log_sum_pt - 7.0)
-        + 0.0117 * max(0.0, 73.0 - Q.mass_top30)
-        - 0.04332 * max(0.0, 43.0 - Q.n_particles)
-        + 0.00345 * max(0.0, 760.0 - Q.sum_pt_top3)
-        + 1.323 * max(0.0, Q.tau32 - 0.28)
-        - 3.622 * max(0.0, 0.96 - Q.z_top20_slots)
-        - 38.8 * max(0.0, Q.z_top50_slots - 0.96)
-        + 0.4527 * max(0.0, Q.n_particles - 38.0) * max(0.0, 0.11 - Q.dr_0)
-        + 0.8606 * max(0.0, Q.n_particles - 40.0) * max(0.0, 0.98 - Q.z_top50_slots)
-        - 0.0001904 * max(0.0, 820.0 - Q.sum_pt_top2) * max(0.0, 7.7 - Q.n_dr_0p2_0p4)
-        + 0.0408 * max(0.0, Q.sum_pt_top50 - 1100.0) * max(0.0, Q.C2 - 0.094)
-        + 6526.0 * max(0.0, 0.00011 - Q.girth2_top5)
-        - 1360.0 * max(0.0, 0.00052 - Q.lam2)
-        - 154.5 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
-        - 9.308e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
-        - 9.978 * max(0.0, Q.C2 - 0.1)
-        - 0.2199 * max(0.0, 7.7 - Q.D2)
-        - 0.008627 * max(0.0, 80.4 - Q.mass)
-        - 0.02418 * max(0.0, 110.0 - Q.mass)
-        - 0.008018 * max(0.0, 1100.0 - Q.sum_pt)
-        - 2.511 * max(0.0, 0.61 - Q.tau32)
-        - 0.03188 * max(0.0, 75.0 - Q.mass) * max(0.0, 0.33 - Q.max_dr)
-        - 0.2274 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.004547 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
-        + 110.3 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
-        - 0.004748 * max(0.0, Q.mass_top30 - 49.0)
-        + 0.01343 * max(0.0, Q.mass_top50 - 150.0)
-        - 1.024 * max(0.0, Q.max_dr - 0.44)
-        + 2.665 * max(0.0, Q.z_top30_slots - 0.93)
-        - 11.41 * max(0.0, 0.02 - Q.girth2_top30) * max(0.0, 0.86 - Q.tau32)
-        - 0.007465 * max(0.0, Q.mass_top50 - 160.0) * max(0.0, Q.z_dr_0p05_0p1 - 0.55)
-        - 0.1053 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
-        - 0.008418 * max(0.0, 91.2 - Q.mass)
-        - 0.01399 * max(0.0, 100.0 - Q.mass)
-        - 26.91 * max(0.0, 0.026 - Q.e2)
-        + 0.09064 * max(0.0, 120.0 - Q.mass)
-        - 0.02 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
-        + 1.549 * max(0.0, 0.99 - Q.z_top50_slots)
-        - 0.06757 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
-        + 0.04715 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
-        + 0.2649 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.08899 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
-        - 1.107 * max(0.0, 0.096 - Q.girth)
-        + 56.14 * max(0.0, 0.0015 - Q.lam2)
-        - 0.08214 * max(0.0, Q.mass - 71.0)
-        - 0.08868 * max(0.0, Q.mass - 120.0)
-        - 0.003622 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
-        + 0.005177 * max(0.0, Q.n_particles - 58.0)
-        + 0.008563 * max(0.0, 1000.0 - Q.sum_pt)
-        + 0.01868 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
-        + 8.974e-05 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 44.0 - Q.n_real_top50)
-        + 0.002011 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
-        + 259.2 * max(0.0, 0.0056 - Q.girth2_top40)
-        - 160.4 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
-        - 0.001728 * max(0.0, 920.0 - Q.sum_pt_top40)
-        + 0.1703 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
-        + 7.541 * max(0.0, 0.021 - Q.girth2_top5)
-        + 0.01694 * max(0.0, Q.mass - 150.0)
-        + 0.02018 * max(0.0, Q.mass_top50 - 140.0)
-        + 0.0208 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
-        + 0.00309 * max(0.0, 960.0 - Q.sum_pt_top50)
-        - 0.03158 * max(0.0, Q.z_dr_0_0p05 - 0.77)
-        - 0.634 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
-        - 0.02565 * max(0.0, 0.021 - Q.girth2_top5) * max(0.0, 720.0 - Q.sum_pt_top3)
-        + 0.0006945 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.45 - Q.tau21)
-        - 22.35 * max(0.0, 0.0048 - Q.z_dr_0p2_0p4)
-        + 0.002615 * max(0.0, 80.4 - Q.mass) * max(0.0, 3.1 - Q.D2)
-        - 0.005265 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.39 - Q.planar_flow)
-        - 3.972 * max(0.0, Q.C2 - 0.055)
-        + 0.004798 * max(0.0, Q.mass_top30 - 130.0)
-        - 0.02647 * max(0.0, 63.0 - Q.mass_top50)
-        + 3461.0 * max(0.0, Q.LHA - 0.41) * max(0.0, 0.0044 - Q.lam2)
-        - 2.354 * max(0.0, 6.8 - Q.log_sum_pt)
-        + 7.95 * max(0.0, 7.0 - Q.log_sum_pt)
-        - 0.01487 * max(0.0, Q.mass - 140.0)
-        - 0.0222 * max(0.0, Q.mass - 172.8)
-        + 0.003406 * max(0.0, Q.mass_top10 - 67.0)
-        - 0.00875 * max(0.0, 1000.0 - Q.sum_pt_top40)
-        - 0.001504 * max(0.0, 130.0 - Q.mass)
-        + 6.089 * max(0.0, 0.96 - Q.z_top50_slots)
+    return (0.2841
+        + 7.136 * max(0.0, 0.057 - Q.girth)
+        + 74.45 * max(0.0, 0.0062 - Q.girth2_top20)
+        + 122.3 * max(0.0, 0.0058 - Q.lam1)
+        + 0.155 * max(0.0, Q.mass - 80.4)
+        + 0.06006 * max(0.0, Q.mass - 91.2)
+        - 151.4 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
+        - 0.02621 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
+        - 13.87 * max(0.0, Q.log_sum_pt - 6.8)
+        + 29.89 * max(0.0, Q.log_sum_pt - 6.9)
+        - 8.949 * max(0.0, Q.log_sum_pt - 7.0)
+        + 0.01722 * max(0.0, 73.0 - Q.mass_top30)
+        - 0.04297 * max(0.0, 43.0 - Q.n_particles)
+        + 0.002712 * max(0.0, 760.0 - Q.sum_pt_top3)
+        - 3.893 * max(0.0, 0.96 - Q.z_top20_slots)
+        - 43.6 * max(0.0, Q.z_top50_slots - 0.96)
+        - 351.2 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
+        - 0.0001104 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
+        - 0.2434 * max(0.0, 7.7 - Q.D2)
+        - 0.04054 * max(0.0, 80.4 - Q.mass)
+        - 0.02129 * max(0.0, 110.0 - Q.mass)
+        - 0.01422 * max(0.0, 1100.0 - Q.sum_pt)
+        - 5.259 * max(0.0, 0.61 - Q.tau32)
+        - 0.2473 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.003198 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
+        + 73.03 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
+        - 0.007075 * max(0.0, Q.mass_top30 - 49.0)
+        + 0.03348 * max(0.0, Q.mass_top50 - 150.0)
+        - 1.214 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
+        - 0.019 * max(0.0, 91.2 - Q.mass)
+        - 0.01957 * max(0.0, 100.0 - Q.mass)
+        - 12.67 * max(0.0, 0.026 - Q.e2)
+        + 0.1345 * max(0.0, 120.0 - Q.mass)
+        - 0.2156 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
+        + 19.01 * max(0.0, 0.99 - Q.z_top50_slots)
+        - 0.1466 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
+        - 0.02393 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
+        + 0.3225 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.18 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
+        + 8.749 * max(0.0, 0.096 - Q.girth)
+        - 0.08493 * max(0.0, Q.mass - 71.0)
+        - 0.1364 * max(0.0, Q.mass - 120.0)
+        - 0.02573 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
+        + 0.01067 * max(0.0, 1000.0 - Q.sum_pt)
+        + 0.01909 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
+        + 0.003782 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
+        + 335.8 * max(0.0, 0.0056 - Q.girth2_top40)
+        - 151.8 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
+        - 0.0003905 * max(0.0, 920.0 - Q.sum_pt_top40)
+        + 0.1255 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.007216 * max(0.0, Q.mass - 150.0)
+        + 0.03439 * max(0.0, Q.mass_top50 - 140.0)
+        + 0.1276 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
+        + 0.002621 * max(0.0, 960.0 - Q.sum_pt_top50)
+        - 1.569 * max(0.0, Q.z_dr_0_0p05 - 0.77)
+        - 1.086 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
+        - 10.57 * max(0.0, Q.C2 - 0.055)
+        - 0.00998 * max(0.0, 63.0 - Q.mass_top50)
+        - 3.283 * max(0.0, 6.8 - Q.log_sum_pt)
+        + 9.758 * max(0.0, 7.0 - Q.log_sum_pt)
+        - 0.01569 * max(0.0, Q.mass - 140.0)
+        - 0.02898 * max(0.0, Q.mass - 172.8)
+        - 0.008234 * max(0.0, 1000.0 - Q.sum_pt_top40)
+        + 0.00322 * max(0.0, 130.0 - Q.mass)
     )
 
 
 def score_q(Q):
-    return (-0.2975
-        - 3.645 * max(0.0, 0.057 - Q.girth)
-        + 67.82 * max(0.0, 0.0062 - Q.girth2_top20)
-        + 56.23 * max(0.0, 0.0058 - Q.lam1)
-        + 0.1525 * max(0.0, Q.mass - 80.4)
-        + 0.05902 * max(0.0, Q.mass - 91.2)
-        - 56.65 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
-        - 0.01725 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
-        - 133.3 * max(0.0, 0.0021 - Q.girth2_top20)
-        - 3.484 * max(0.0, Q.log_sum_pt - 6.8)
-        + 8.119 * max(0.0, Q.log_sum_pt - 6.9)
-        - 5.5 * max(0.0, Q.log_sum_pt - 7.0)
-        - 0.001641 * max(0.0, 73.0 - Q.mass_top30)
-        + 0.01393 * max(0.0, 43.0 - Q.n_particles)
-        - 0.0007977 * max(0.0, 760.0 - Q.sum_pt_top3)
-        - 0.2631 * max(0.0, Q.tau32 - 0.28)
-        + 1.649 * max(0.0, 0.96 - Q.z_top20_slots)
-        - 0.6276 * max(0.0, Q.z_top50_slots - 0.96)
-        - 0.1243 * max(0.0, Q.n_particles - 38.0) * max(0.0, 0.11 - Q.dr_0)
-        - 0.4551 * max(0.0, Q.n_particles - 40.0) * max(0.0, 0.98 - Q.z_top50_slots)
-        + 5.042e-05 * max(0.0, 820.0 - Q.sum_pt_top2) * max(0.0, 7.7 - Q.n_dr_0p2_0p4)
-        + 0.08224 * max(0.0, Q.sum_pt_top50 - 1100.0) * max(0.0, Q.C2 - 0.094)
-        + 1700.0 * max(0.0, 0.00011 - Q.girth2_top5)
-        + 44.26 * max(0.0, 0.00052 - Q.lam2)
-        - 295.1 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
-        - 2.272e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
-        - 11.04 * max(0.0, Q.C2 - 0.1)
-        - 0.22 * max(0.0, 7.7 - Q.D2)
-        + 0.001956 * max(0.0, 80.4 - Q.mass)
-        - 0.0323 * max(0.0, 110.0 - Q.mass)
-        + 0.003583 * max(0.0, 1100.0 - Q.sum_pt)
-        - 2.806 * max(0.0, 0.61 - Q.tau32)
-        - 0.03133 * max(0.0, 75.0 - Q.mass) * max(0.0, 0.33 - Q.max_dr)
-        - 0.2461 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.004314 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
-        + 226.5 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
-        - 0.002914 * max(0.0, Q.mass_top30 - 49.0)
-        + 0.01123 * max(0.0, Q.mass_top50 - 150.0)
-        + 0.06454 * max(0.0, Q.max_dr - 0.44)
-        + 0.5736 * max(0.0, Q.z_top30_slots - 0.93)
-        + 26.96 * max(0.0, 0.02 - Q.girth2_top30) * max(0.0, 0.86 - Q.tau32)
-        + 0.01517 * max(0.0, Q.mass_top50 - 160.0) * max(0.0, Q.z_dr_0p05_0p1 - 0.55)
-        + 0.4924 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
-        + 0.002905 * max(0.0, 91.2 - Q.mass)
-        - 0.02677 * max(0.0, 100.0 - Q.mass)
-        - 34.19 * max(0.0, 0.026 - Q.e2)
-        + 0.1012 * max(0.0, 120.0 - Q.mass)
-        - 0.00473 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
-        - 1.005 * max(0.0, 0.99 - Q.z_top50_slots)
-        - 0.165 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
-        + 0.07044 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
-        + 0.263 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.186 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
-        - 1.636 * max(0.0, 0.096 - Q.girth)
-        + 33.23 * max(0.0, 0.0015 - Q.lam2)
-        - 0.1147 * max(0.0, Q.mass - 71.0)
-        - 0.1023 * max(0.0, Q.mass - 120.0)
-        - 0.004449 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
-        + 0.004039 * max(0.0, Q.n_particles - 58.0)
-        + 0.005027 * max(0.0, 1000.0 - Q.sum_pt)
-        + 0.022 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
-        + 9.82e-05 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 44.0 - Q.n_real_top50)
-        + 0.00654 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
-        + 340.4 * max(0.0, 0.0056 - Q.girth2_top40)
-        - 283.5 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
-        - 0.001305 * max(0.0, 920.0 - Q.sum_pt_top40)
-        + 0.1231 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
-        + 6.889 * max(0.0, 0.021 - Q.girth2_top5)
-        + 0.01243 * max(0.0, Q.mass - 150.0)
-        + 0.003232 * max(0.0, Q.mass_top50 - 140.0)
-        + 0.01535 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
-        + 0.001631 * max(0.0, 960.0 - Q.sum_pt_top50)
-        - 0.1998 * max(0.0, Q.z_dr_0_0p05 - 0.77)
-        - 0.5319 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
-        - 0.01691 * max(0.0, 0.021 - Q.girth2_top5) * max(0.0, 720.0 - Q.sum_pt_top3)
-        + 0.007483 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.45 - Q.tau21)
-        - 52.72 * max(0.0, 0.0048 - Q.z_dr_0p2_0p4)
-        + 0.005313 * max(0.0, 80.4 - Q.mass) * max(0.0, 3.1 - Q.D2)
-        - 0.01751 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.39 - Q.planar_flow)
-        - 4.2 * max(0.0, Q.C2 - 0.055)
-        + 0.01323 * max(0.0, Q.mass_top30 - 130.0)
-        - 0.02607 * max(0.0, 63.0 - Q.mass_top50)
-        + 6224.0 * max(0.0, Q.LHA - 0.41) * max(0.0, 0.0044 - Q.lam2)
-        - 5.362 * max(0.0, 6.8 - Q.log_sum_pt)
-        + 2.741 * max(0.0, 7.0 - Q.log_sum_pt)
-        - 0.01383 * max(0.0, Q.mass - 140.0)
-        + 0.000652 * max(0.0, Q.mass - 172.8)
-        + 0.002427 * max(0.0, Q.mass_top10 - 67.0)
-        - 0.007931 * max(0.0, 1000.0 - Q.sum_pt_top40)
-        - 9.799e-05 * max(0.0, 130.0 - Q.mass)
-        + 9.167 * max(0.0, 0.96 - Q.z_top50_slots)
+    return (0.7858
+        - 6.977 * max(0.0, 0.057 - Q.girth)
+        + 49.11 * max(0.0, 0.0062 - Q.girth2_top20)
+        + 139.1 * max(0.0, 0.0058 - Q.lam1)
+        + 0.143 * max(0.0, Q.mass - 80.4)
+        + 0.05048 * max(0.0, Q.mass - 91.2)
+        - 316.2 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
+        - 0.01956 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
+        - 3.778 * max(0.0, Q.log_sum_pt - 6.8)
+        + 4.684 * max(0.0, Q.log_sum_pt - 6.9)
+        - 1.617 * max(0.0, Q.log_sum_pt - 7.0)
+        - 0.006909 * max(0.0, 73.0 - Q.mass_top30)
+        + 0.01446 * max(0.0, 43.0 - Q.n_particles)
+        - 0.0009583 * max(0.0, 760.0 - Q.sum_pt_top3)
+        + 1.127 * max(0.0, 0.96 - Q.z_top20_slots)
+        - 6.699 * max(0.0, Q.z_top50_slots - 0.96)
+        - 58.61 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
+        - 4.851e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
+        - 0.3038 * max(0.0, 7.7 - Q.D2)
+        + 0.01446 * max(0.0, 80.4 - Q.mass)
+        - 0.03056 * max(0.0, 110.0 - Q.mass)
+        + 0.0003473 * max(0.0, 1100.0 - Q.sum_pt)
+        - 2.703 * max(0.0, 0.61 - Q.tau32)
+        - 0.283 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.005319 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
+        + 112.4 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
+        + 0.005004 * max(0.0, Q.mass_top30 - 49.0)
+        + 0.04092 * max(0.0, Q.mass_top50 - 150.0)
+        + 0.8963 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
+        + 0.009476 * max(0.0, 91.2 - Q.mass)
+        - 0.03092 * max(0.0, 100.0 - Q.mass)
+        - 63.37 * max(0.0, 0.026 - Q.e2)
+        + 0.09139 * max(0.0, 120.0 - Q.mass)
+        - 0.002766 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
+        - 3.175 * max(0.0, 0.99 - Q.z_top50_slots)
+        - 0.196 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
+        - 0.02825 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
+        + 0.3699 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.226 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
+        - 0.465 * max(0.0, 0.096 - Q.girth)
+        - 0.1107 * max(0.0, Q.mass - 71.0)
+        - 0.09257 * max(0.0, Q.mass - 120.0)
+        - 0.0003692 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
+        + 0.00552 * max(0.0, 1000.0 - Q.sum_pt)
+        + 0.02872 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
+        + 0.00911 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
+        + 324.7 * max(0.0, 0.0056 - Q.girth2_top40)
+        - 192.8 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
+        - 0.001247 * max(0.0, 920.0 - Q.sum_pt_top40)
+        + 0.06054 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.02624 * max(0.0, Q.mass - 150.0)
+        + 0.03366 * max(0.0, Q.mass_top50 - 140.0)
+        + 0.0181 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
+        + 0.001848 * max(0.0, 960.0 - Q.sum_pt_top50)
+        - 0.3898 * max(0.0, Q.z_dr_0_0p05 - 0.77)
+        - 1.122 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
+        - 13.03 * max(0.0, Q.C2 - 0.055)
+        - 0.03566 * max(0.0, 63.0 - Q.mass_top50)
+        - 5.885 * max(0.0, 6.8 - Q.log_sum_pt)
+        + 3.781 * max(0.0, 7.0 - Q.log_sum_pt)
+        - 0.02018 * max(0.0, Q.mass - 140.0)
+        - 0.003649 * max(0.0, Q.mass - 172.8)
+        - 0.008249 * max(0.0, 1000.0 - Q.sum_pt_top40)
+        + 0.003144 * max(0.0, 130.0 - Q.mass)
     )
 
 
 def score_W(Q):
-    return (0.9564
-        - 31.08 * max(0.0, 0.057 - Q.girth)
-        - 189.0 * max(0.0, 0.0062 - Q.girth2_top20)
-        - 160.3 * max(0.0, 0.0058 - Q.lam1)
-        - 0.2714 * max(0.0, Q.mass - 80.4)
-        + 0.2205 * max(0.0, Q.mass - 91.2)
-        + 2388.0 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
-        - 0.1774 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
-        - 57.75 * max(0.0, 0.0021 - Q.girth2_top20)
-        + 0.02984 * max(0.0, Q.log_sum_pt - 6.8)
-        + 13.29 * max(0.0, Q.log_sum_pt - 6.9)
-        - 13.48 * max(0.0, Q.log_sum_pt - 7.0)
-        - 0.001449 * max(0.0, 73.0 - Q.mass_top30)
-        + 0.02145 * max(0.0, 43.0 - Q.n_particles)
-        - 0.001088 * max(0.0, 760.0 - Q.sum_pt_top3)
-        - 0.09797 * max(0.0, Q.tau32 - 0.28)
-        + 0.6392 * max(0.0, 0.96 - Q.z_top20_slots)
-        - 11.75 * max(0.0, Q.z_top50_slots - 0.96)
-        - 0.04257 * max(0.0, Q.n_particles - 38.0) * max(0.0, 0.11 - Q.dr_0)
-        - 0.4965 * max(0.0, Q.n_particles - 40.0) * max(0.0, 0.98 - Q.z_top50_slots)
-        + 5.051e-05 * max(0.0, 820.0 - Q.sum_pt_top2) * max(0.0, 7.7 - Q.n_dr_0p2_0p4)
-        + 0.09478 * max(0.0, Q.sum_pt_top50 - 1100.0) * max(0.0, Q.C2 - 0.094)
-        - 3539.0 * max(0.0, 0.00011 - Q.girth2_top5)
-        + 392.1 * max(0.0, 0.00052 - Q.lam2)
-        - 2186.0 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
-        - 3.953e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
-        - 3.692 * max(0.0, Q.C2 - 0.1)
-        + 0.07311 * max(0.0, 7.7 - Q.D2)
-        - 0.1621 * max(0.0, 80.4 - Q.mass)
-        + 0.01177 * max(0.0, 110.0 - Q.mass)
-        + 0.0445 * max(0.0, 1100.0 - Q.sum_pt)
-        + 0.7008 * max(0.0, 0.61 - Q.tau32)
-        - 0.09839 * max(0.0, 75.0 - Q.mass) * max(0.0, 0.33 - Q.max_dr)
-        + 0.1075 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        - 0.001373 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
-        - 106.6 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
-        + 0.01196 * max(0.0, Q.mass_top30 - 49.0)
-        - 0.01531 * max(0.0, Q.mass_top50 - 150.0)
-        + 1.186 * max(0.0, Q.max_dr - 0.44)
-        - 3.655 * max(0.0, Q.z_top30_slots - 0.93)
-        + 49.44 * max(0.0, 0.02 - Q.girth2_top30) * max(0.0, 0.86 - Q.tau32)
-        + 0.1909 * max(0.0, Q.mass_top50 - 160.0) * max(0.0, Q.z_dr_0p05_0p1 - 0.55)
-        + 0.7861 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
-        + 0.2785 * max(0.0, 91.2 - Q.mass)
-        - 0.06161 * max(0.0, 100.0 - Q.mass)
-        + 13.67 * max(0.0, 0.026 - Q.e2)
-        - 0.02632 * max(0.0, 120.0 - Q.mass)
-        - 0.1134 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
-        + 1.052 * max(0.0, 0.99 - Q.z_top50_slots)
-        + 0.0005726 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
-        + 0.4293 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
-        - 0.457 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.03709 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
-        - 7.843 * max(0.0, 0.096 - Q.girth)
-        + 407.2 * max(0.0, 0.0015 - Q.lam2)
-        - 0.01266 * max(0.0, Q.mass - 71.0)
-        + 0.05871 * max(0.0, Q.mass - 120.0)
-        + 0.06362 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
-        - 0.08469 * max(0.0, Q.n_particles - 58.0)
-        + 0.009894 * max(0.0, 1000.0 - Q.sum_pt)
-        - 0.09014 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
-        + 0.0004942 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 44.0 - Q.n_real_top50)
-        + 0.01861 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
-        - 197.0 * max(0.0, 0.0056 - Q.girth2_top40)
-        + 223.1 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
-        + 0.01377 * max(0.0, 920.0 - Q.sum_pt_top40)
-        + 1.452 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
-        - 9.842 * max(0.0, 0.021 - Q.girth2_top5)
-        - 0.07025 * max(0.0, Q.mass - 150.0)
-        + 0.01647 * max(0.0, Q.mass_top50 - 140.0)
-        + 0.03431 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
-        - 0.003502 * max(0.0, 960.0 - Q.sum_pt_top50)
-        + 0.6149 * max(0.0, Q.z_dr_0_0p05 - 0.77)
-        + 2.558 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
-        + 0.04781 * max(0.0, 0.021 - Q.girth2_top5) * max(0.0, 720.0 - Q.sum_pt_top3)
-        - 0.01022 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.45 - Q.tau21)
-        + 78.63 * max(0.0, 0.0048 - Q.z_dr_0p2_0p4)
-        - 0.0131 * max(0.0, 80.4 - Q.mass) * max(0.0, 3.1 - Q.D2)
-        + 0.04709 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.39 - Q.planar_flow)
-        + 6.476 * max(0.0, Q.C2 - 0.055)
-        - 0.006636 * max(0.0, Q.mass_top30 - 130.0)
-        + 0.01963 * max(0.0, 63.0 - Q.mass_top50)
-        - 8311.0 * max(0.0, Q.LHA - 0.41) * max(0.0, 0.0044 - Q.lam2)
-        - 7.517 * max(0.0, 6.8 - Q.log_sum_pt)
-        - 36.15 * max(0.0, 7.0 - Q.log_sum_pt)
-        + 0.01645 * max(0.0, Q.mass - 140.0)
-        + 0.02085 * max(0.0, Q.mass - 172.8)
-        - 0.007164 * max(0.0, Q.mass_top10 - 67.0)
-        - 0.01042 * max(0.0, 1000.0 - Q.sum_pt_top40)
-        - 0.03177 * max(0.0, 130.0 - Q.mass)
-        - 80.01 * max(0.0, 0.96 - Q.z_top50_slots)
+    return (-0.5523
+        - 25.59 * max(0.0, 0.057 - Q.girth)
+        - 206.6 * max(0.0, 0.0062 - Q.girth2_top20)
+        - 500.8 * max(0.0, 0.0058 - Q.lam1)
+        - 0.2569 * max(0.0, Q.mass - 80.4)
+        + 0.226 * max(0.0, Q.mass - 91.2)
+        + 3613.0 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
+        - 0.1711 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
+        - 4.143 * max(0.0, Q.log_sum_pt - 6.8)
+        + 22.63 * max(0.0, Q.log_sum_pt - 6.9)
+        - 17.43 * max(0.0, Q.log_sum_pt - 7.0)
+        - 0.005006 * max(0.0, 73.0 - Q.mass_top30)
+        + 0.04221 * max(0.0, 43.0 - Q.n_particles)
+        - 5.978e-05 * max(0.0, 760.0 - Q.sum_pt_top3)
+        + 1.975 * max(0.0, 0.96 - Q.z_top20_slots)
+        - 6.068 * max(0.0, Q.z_top50_slots - 0.96)
+        - 3290.0 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
+        - 0.0001123 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
+        - 0.03654 * max(0.0, 7.7 - Q.D2)
+        - 0.1923 * max(0.0, 80.4 - Q.mass)
+        + 0.004319 * max(0.0, 110.0 - Q.mass)
+        + 0.04177 * max(0.0, 1100.0 - Q.sum_pt)
+        + 2.082 * max(0.0, 0.61 - Q.tau32)
+        + 0.1122 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        - 0.0001427 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
+        - 30.34 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
+        + 0.02264 * max(0.0, Q.mass_top30 - 49.0)
+        - 0.05666 * max(0.0, Q.mass_top50 - 150.0)
+        + 1.097 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
+        + 0.2787 * max(0.0, 91.2 - Q.mass)
+        - 0.06547 * max(0.0, 100.0 - Q.mass)
+        - 0.2374 * max(0.0, 0.026 - Q.e2)
+        + 0.01704 * max(0.0, 120.0 - Q.mass)
+        + 0.02601 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
+        - 28.27 * max(0.0, 0.99 - Q.z_top50_slots)
+        + 0.1949 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
+        + 0.2392 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
+        - 0.3449 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        - 0.1752 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
+        - 4.819 * max(0.0, 0.096 - Q.girth)
+        - 0.01234 * max(0.0, Q.mass - 71.0)
+        + 0.02696 * max(0.0, Q.mass - 120.0)
+        + 0.08091 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
+        - 0.001201 * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.06595 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
+        + 0.009503 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
+        - 61.3 * max(0.0, 0.0056 - Q.girth2_top40)
+        + 117.9 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
+        + 0.008361 * max(0.0, 920.0 - Q.sum_pt_top40)
+        + 2.006 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
+        + 0.0001232 * max(0.0, Q.mass - 150.0)
+        - 0.03555 * max(0.0, Q.mass_top50 - 140.0)
+        - 0.03904 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
+        - 0.004203 * max(0.0, 960.0 - Q.sum_pt_top50)
+        + 0.8332 * max(0.0, Q.z_dr_0_0p05 - 0.77)
+        - 0.6369 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
+        - 4.231 * max(0.0, Q.C2 - 0.055)
+        + 0.007696 * max(0.0, 63.0 - Q.mass_top50)
+        + 2.189 * max(0.0, 6.8 - Q.log_sum_pt)
+        - 27.0 * max(0.0, 7.0 - Q.log_sum_pt)
+        + 0.0248 * max(0.0, Q.mass - 140.0)
+        + 0.03039 * max(0.0, Q.mass - 172.8)
+        - 0.01062 * max(0.0, 1000.0 - Q.sum_pt_top40)
+        - 0.03335 * max(0.0, 130.0 - Q.mass)
     )
 
 
 def score_Z(Q):
-    return (-0.3449
-        + 65.01 * max(0.0, 0.057 - Q.girth)
-        + 200.7 * max(0.0, 0.0062 - Q.girth2_top20)
-        + 327.8 * max(0.0, 0.0058 - Q.lam1)
-        + 0.1552 * max(0.0, Q.mass - 80.4)
-        - 0.2406 * max(0.0, Q.mass - 91.2)
-        - 4398.0 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
-        - 0.1356 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
-        - 53.86 * max(0.0, 0.0021 - Q.girth2_top20)
-        + 7.816 * max(0.0, Q.log_sum_pt - 6.8)
-        - 1.622 * max(0.0, Q.log_sum_pt - 6.9)
-        - 4.48 * max(0.0, Q.log_sum_pt - 7.0)
-        + 0.01577 * max(0.0, 73.0 - Q.mass_top30)
-        + 0.02391 * max(0.0, 43.0 - Q.n_particles)
-        - 0.0003329 * max(0.0, 760.0 - Q.sum_pt_top3)
-        - 0.4055 * max(0.0, Q.tau32 - 0.28)
-        + 0.9454 * max(0.0, 0.96 - Q.z_top20_slots)
-        - 26.35 * max(0.0, Q.z_top50_slots - 0.96)
-        - 0.06371 * max(0.0, Q.n_particles - 38.0) * max(0.0, 0.11 - Q.dr_0)
-        - 0.2803 * max(0.0, Q.n_particles - 40.0) * max(0.0, 0.98 - Q.z_top50_slots)
-        + 4.609e-05 * max(0.0, 820.0 - Q.sum_pt_top2) * max(0.0, 7.7 - Q.n_dr_0p2_0p4)
-        - 0.2729 * max(0.0, Q.sum_pt_top50 - 1100.0) * max(0.0, Q.C2 - 0.094)
-        - 4424.0 * max(0.0, 0.00011 - Q.girth2_top5)
-        + 521.5 * max(0.0, 0.00052 - Q.lam2)
-        + 3479.0 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
-        - 6.872e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
-        - 1.356 * max(0.0, Q.C2 - 0.1)
-        - 0.009388 * max(0.0, 7.7 - Q.D2)
-        + 0.1718 * max(0.0, 80.4 - Q.mass)
-        - 0.0003338 * max(0.0, 110.0 - Q.mass)
-        + 0.04306 * max(0.0, 1100.0 - Q.sum_pt)
-        + 0.01882 * max(0.0, 0.61 - Q.tau32)
-        + 0.3168 * max(0.0, 75.0 - Q.mass) * max(0.0, 0.33 - Q.max_dr)
-        + 0.2151 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        - 0.000875 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
-        - 357.4 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
-        + 0.01808 * max(0.0, Q.mass_top30 - 49.0)
-        + 0.01722 * max(0.0, Q.mass_top50 - 150.0)
-        + 1.452 * max(0.0, Q.max_dr - 0.44)
-        - 5.053 * max(0.0, Q.z_top30_slots - 0.93)
-        + 32.02 * max(0.0, 0.02 - Q.girth2_top30) * max(0.0, 0.86 - Q.tau32)
-        + 0.2151 * max(0.0, Q.mass_top50 - 160.0) * max(0.0, Q.z_dr_0p05_0p1 - 0.55)
-        + 0.8296 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
-        - 0.3047 * max(0.0, 91.2 - Q.mass)
-        + 0.2527 * max(0.0, 100.0 - Q.mass)
-        - 6.351 * max(0.0, 0.026 - Q.e2)
-        - 0.09778 * max(0.0, 120.0 - Q.mass)
-        - 0.008022 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
-        - 38.13 * max(0.0, 0.99 - Q.z_top50_slots)
-        + 0.5279 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
-        - 0.501 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
-        - 0.0009801 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        - 0.6575 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
-        - 8.454 * max(0.0, 0.096 - Q.girth)
-        + 478.2 * max(0.0, 0.0015 - Q.lam2)
-        - 0.05777 * max(0.0, Q.mass - 71.0)
-        + 0.1399 * max(0.0, Q.mass - 120.0)
-        + 0.07062 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
-        - 0.1122 * max(0.0, Q.n_particles - 58.0)
-        + 0.03251 * max(0.0, 1000.0 - Q.sum_pt)
-        - 0.08022 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
-        + 0.0003704 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 44.0 - Q.n_real_top50)
-        + 0.03419 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
-        - 129.9 * max(0.0, 0.0056 - Q.girth2_top40)
-        + 391.1 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
-        + 0.01245 * max(0.0, 920.0 - Q.sum_pt_top40)
-        + 1.178 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
-        - 3.354 * max(0.0, 0.021 - Q.girth2_top5)
-        - 0.1087 * max(0.0, Q.mass - 150.0)
-        - 0.1407 * max(0.0, Q.mass_top50 - 140.0)
-        + 0.0142 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
-        - 0.006554 * max(0.0, 960.0 - Q.sum_pt_top50)
-        + 0.04472 * max(0.0, Q.z_dr_0_0p05 - 0.77)
-        + 3.69 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
-        + 0.004393 * max(0.0, 0.021 - Q.girth2_top5) * max(0.0, 720.0 - Q.sum_pt_top3)
-        - 0.004388 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.45 - Q.tau21)
-        - 25.59 * max(0.0, 0.0048 - Q.z_dr_0p2_0p4)
-        + 0.00466 * max(0.0, 80.4 - Q.mass) * max(0.0, 3.1 - Q.D2)
-        - 0.005611 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.39 - Q.planar_flow)
-        - 3.139 * max(0.0, Q.C2 - 0.055)
-        - 0.00213 * max(0.0, Q.mass_top30 - 130.0)
-        - 0.04222 * max(0.0, 63.0 - Q.mass_top50)
-        + 1570.0 * max(0.0, Q.LHA - 0.41) * max(0.0, 0.0044 - Q.lam2)
-        - 16.7 * max(0.0, 6.8 - Q.log_sum_pt)
-        - 42.77 * max(0.0, 7.0 - Q.log_sum_pt)
-        + 0.1512 * max(0.0, Q.mass - 140.0)
-        + 0.06009 * max(0.0, Q.mass - 172.8)
-        + 0.001594 * max(0.0, Q.mass_top10 - 67.0)
-        - 0.01228 * max(0.0, 1000.0 - Q.sum_pt_top40)
-        + 0.02527 * max(0.0, 130.0 - Q.mass)
-        + 20.36 * max(0.0, 0.96 - Q.z_top50_slots)
+    return (-0.3909
+        + 63.74 * max(0.0, 0.057 - Q.girth)
+        + 207.4 * max(0.0, 0.0062 - Q.girth2_top20)
+        + 111.1 * max(0.0, 0.0058 - Q.lam1)
+        + 0.1581 * max(0.0, Q.mass - 80.4)
+        - 0.2707 * max(0.0, Q.mass - 91.2)
+        - 4050.0 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
+        - 0.1374 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
+        + 2.417 * max(0.0, Q.log_sum_pt - 6.8)
+        + 10.54 * max(0.0, Q.log_sum_pt - 6.9)
+        - 10.53 * max(0.0, Q.log_sum_pt - 7.0)
+        + 0.01608 * max(0.0, 73.0 - Q.mass_top30)
+        + 0.0399 * max(0.0, 43.0 - Q.n_particles)
+        - 0.000189 * max(0.0, 760.0 - Q.sum_pt_top3)
+        + 2.486 * max(0.0, 0.96 - Q.z_top20_slots)
+        + 19.14 * max(0.0, Q.z_top50_slots - 0.96)
+        + 3185.0 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
+        - 0.0001311 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
+        - 0.08231 * max(0.0, 7.7 - Q.D2)
+        + 0.1923 * max(0.0, 80.4 - Q.mass)
+        - 0.01129 * max(0.0, 110.0 - Q.mass)
+        + 0.04317 * max(0.0, 1100.0 - Q.sum_pt)
+        + 1.124 * max(0.0, 0.61 - Q.tau32)
+        + 0.3561 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.001435 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
+        - 398.3 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
+        + 0.01937 * max(0.0, Q.mass_top30 - 49.0)
+        - 0.01128 * max(0.0, Q.mass_top50 - 150.0)
+        + 1.291 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
+        - 0.3286 * max(0.0, 91.2 - Q.mass)
+        + 0.3081 * max(0.0, 100.0 - Q.mass)
+        - 32.17 * max(0.0, 0.026 - Q.e2)
+        - 0.1409 * max(0.0, 120.0 - Q.mass)
+        + 0.02291 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
+        - 19.94 * max(0.0, 0.99 - Q.z_top50_slots)
+        + 0.5762 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
+        + 0.1333 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
+        - 0.6066 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        - 0.7135 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
+        - 10.11 * max(0.0, 0.096 - Q.girth)
+        - 0.07634 * max(0.0, Q.mass - 71.0)
+        + 0.1761 * max(0.0, Q.mass - 120.0)
+        + 0.08822 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
+        + 0.01857 * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.06486 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
+        + 0.0292 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
+        - 7.287 * max(0.0, 0.0056 - Q.girth2_top40)
+        + 425.1 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
+        + 0.01461 * max(0.0, 920.0 - Q.sum_pt_top40)
+        + 1.773 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.08143 * max(0.0, Q.mass - 150.0)
+        - 0.1363 * max(0.0, Q.mass_top50 - 140.0)
+        + 0.002701 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
+        - 0.01154 * max(0.0, 960.0 - Q.sum_pt_top50)
+        + 0.4667 * max(0.0, Q.z_dr_0_0p05 - 0.77)
+        + 1.382 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
+        - 9.959 * max(0.0, Q.C2 - 0.055)
+        - 0.04154 * max(0.0, 63.0 - Q.mass_top50)
+        - 11.22 * max(0.0, 6.8 - Q.log_sum_pt)
+        - 35.12 * max(0.0, 7.0 - Q.log_sum_pt)
+        + 0.1481 * max(0.0, Q.mass - 140.0)
+        + 0.06017 * max(0.0, Q.mass - 172.8)
+        - 0.01145 * max(0.0, 1000.0 - Q.sum_pt_top40)
+        + 0.01733 * max(0.0, 130.0 - Q.mass)
     )
 
 
 def score_t(Q):
-    return (-0.5273
-        + 11.27 * max(0.0, 0.057 - Q.girth)
-        - 25.72 * max(0.0, 0.0062 - Q.girth2_top20)
-        - 55.4 * max(0.0, 0.0058 - Q.lam1)
-        + 0.007158 * max(0.0, Q.mass - 80.4)
-        + 0.03485 * max(0.0, Q.mass - 91.2)
-        + 723.5 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
-        - 0.006924 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
-        - 190.3 * max(0.0, 0.0021 - Q.girth2_top20)
-        - 5.517 * max(0.0, Q.log_sum_pt - 6.8)
-        + 3.441 * max(0.0, Q.log_sum_pt - 6.9)
-        + 1.996 * max(0.0, Q.log_sum_pt - 7.0)
-        + 0.003847 * max(0.0, 73.0 - Q.mass_top30)
-        + 0.007468 * max(0.0, 43.0 - Q.n_particles)
-        + 0.0003401 * max(0.0, 760.0 - Q.sum_pt_top3)
-        + 0.08652 * max(0.0, Q.tau32 - 0.28)
-        + 0.2982 * max(0.0, 0.96 - Q.z_top20_slots)
-        - 5.337 * max(0.0, Q.z_top50_slots - 0.96)
-        - 0.004456 * max(0.0, Q.n_particles - 38.0) * max(0.0, 0.11 - Q.dr_0)
-        - 0.2963 * max(0.0, Q.n_particles - 40.0) * max(0.0, 0.98 - Q.z_top50_slots)
-        + 2.227e-05 * max(0.0, 820.0 - Q.sum_pt_top2) * max(0.0, 7.7 - Q.n_dr_0p2_0p4)
-        + 0.07635 * max(0.0, Q.sum_pt_top50 - 1100.0) * max(0.0, Q.C2 - 0.094)
-        - 2187.0 * max(0.0, 0.00011 - Q.girth2_top5)
-        - 35.76 * max(0.0, 0.00052 - Q.lam2)
-        - 414.4 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
-        - 1.388e-05 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
-        + 1.049 * max(0.0, Q.C2 - 0.1)
-        + 0.03689 * max(0.0, 7.7 - Q.D2)
-        - 0.01067 * max(0.0, 80.4 - Q.mass)
-        + 0.003692 * max(0.0, 110.0 - Q.mass)
-        + 0.006913 * max(0.0, 1100.0 - Q.sum_pt)
-        + 0.663 * max(0.0, 0.61 - Q.tau32)
-        - 0.2152 * max(0.0, 75.0 - Q.mass) * max(0.0, 0.33 - Q.max_dr)
-        - 0.05943 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        - 0.001785 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
-        + 25.31 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
-        - 0.003633 * max(0.0, Q.mass_top30 - 49.0)
-        + 0.005197 * max(0.0, Q.mass_top50 - 150.0)
-        - 0.7754 * max(0.0, Q.max_dr - 0.44)
-        + 3.397 * max(0.0, Q.z_top30_slots - 0.93)
-        - 37.45 * max(0.0, 0.02 - Q.girth2_top30) * max(0.0, 0.86 - Q.tau32)
-        - 0.09759 * max(0.0, Q.mass_top50 - 160.0) * max(0.0, Q.z_dr_0p05_0p1 - 0.55)
-        - 0.4677 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
-        - 0.01432 * max(0.0, 91.2 - Q.mass)
-        - 0.02055 * max(0.0, 100.0 - Q.mass)
-        - 12.32 * max(0.0, 0.026 - Q.e2)
-        + 0.01895 * max(0.0, 120.0 - Q.mass)
-        - 0.05 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
-        + 5.061 * max(0.0, 0.99 - Q.z_top50_slots)
-        - 0.06076 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
-        + 0.2817 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
-        - 0.0564 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
-        + 0.08433 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
-        + 5.363 * max(0.0, 0.096 - Q.girth)
-        - 99.84 * max(0.0, 0.0015 - Q.lam2)
-        + 0.01893 * max(0.0, Q.mass - 71.0)
-        - 0.05924 * max(0.0, Q.mass - 120.0)
-        - 0.0153 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
-        + 0.0189 * max(0.0, Q.n_particles - 58.0)
-        + 0.02935 * max(0.0, 1000.0 - Q.sum_pt)
-        - 0.06646 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
-        - 3.313e-05 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 44.0 - Q.n_real_top50)
-        + 0.01952 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
-        - 5.734 * max(0.0, 0.0056 - Q.girth2_top40)
-        - 40.88 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
-        - 0.0005647 * max(0.0, 920.0 - Q.sum_pt_top40)
-        - 0.5521 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
-        - 86.8 * max(0.0, 0.021 - Q.girth2_top5)
-        - 0.1262 * max(0.0, Q.mass - 150.0)
-        + 0.129 * max(0.0, Q.mass_top50 - 140.0)
-        - 0.1118 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
-        - 0.01029 * max(0.0, 960.0 - Q.sum_pt_top50)
-        - 9.78 * max(0.0, Q.z_dr_0_0p05 - 0.77)
-        + 14.15 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
-        + 0.08068 * max(0.0, 0.021 - Q.girth2_top5) * max(0.0, 720.0 - Q.sum_pt_top3)
-        + 0.07542 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.45 - Q.tau21)
-        + 4.696 * max(0.0, 0.0048 - Q.z_dr_0p2_0p4)
-        + 0.006328 * max(0.0, 80.4 - Q.mass) * max(0.0, 3.1 - Q.D2)
-        + 0.004209 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.39 - Q.planar_flow)
-        + 1.947 * max(0.0, Q.C2 - 0.055)
-        - 0.01649 * max(0.0, Q.mass_top30 - 130.0)
-        + 0.03825 * max(0.0, 63.0 - Q.mass_top50)
-        - 6389.0 * max(0.0, Q.LHA - 0.41) * max(0.0, 0.0044 - Q.lam2)
-        - 15.99 * max(0.0, 6.8 - Q.log_sum_pt)
-        + 4.18 * max(0.0, 7.0 - Q.log_sum_pt)
-        + 0.03811 * max(0.0, Q.mass - 140.0)
-        - 0.07248 * max(0.0, Q.mass - 172.8)
-        - 0.01174 * max(0.0, Q.mass_top10 - 67.0)
-        - 0.01731 * max(0.0, 1000.0 - Q.sum_pt_top40)
-        - 0.005373 * max(0.0, 130.0 - Q.mass)
-        + 10.05 * max(0.0, 0.96 - Q.z_top50_slots)
+    return (-0.7544
+        - 4.865 * max(0.0, 0.057 - Q.girth)
+        - 48.59 * max(0.0, 0.0062 - Q.girth2_top20)
+        - 115.4 * max(0.0, 0.0058 - Q.lam1)
+        - 0.0267 * max(0.0, Q.mass - 80.4)
+        + 0.02708 * max(0.0, Q.mass - 91.2)
+        + 776.1 * max(0.0, 0.0079 - Q.mass_over_sum_pt_sq)
+        - 0.01157 * max(0.0, 1000.0 - Q.sum_pt) * max(0.0, 0.21 - Q.z_dr_0p2_0p4)
+        - 4.267 * max(0.0, Q.log_sum_pt - 6.8)
+        - 3.828 * max(0.0, Q.log_sum_pt - 6.9)
+        + 7.606 * max(0.0, Q.log_sum_pt - 7.0)
+        - 0.01448 * max(0.0, 73.0 - Q.mass_top30)
+        + 0.008846 * max(0.0, 43.0 - Q.n_particles)
+        + 0.001539 * max(0.0, 760.0 - Q.sum_pt_top3)
+        + 0.6658 * max(0.0, 0.96 - Q.z_top20_slots)
+        - 10.77 * max(0.0, Q.z_top50_slots - 0.96)
+        - 489.2 * max(0.0, 0.008 - Q.mass_over_sum_pt_sq)
+        + 2.872e-06 * max(0.0, 45.0 - Q.n_particles) * max(0.0, Q.sum_pt_top40 - 830.0)
+        + 0.3562 * max(0.0, 7.7 - Q.D2)
+        + 0.04505 * max(0.0, 80.4 - Q.mass)
+        + 0.008304 * max(0.0, 110.0 - Q.mass)
+        + 0.00365 * max(0.0, 1100.0 - Q.sum_pt)
+        - 0.2081 * max(0.0, 0.61 - Q.tau32)
+        - 0.1285 * max(0.0, 120.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        - 0.003143 * max(0.0, 85.0 - Q.mass_top40) * max(0.0, 8.2 - Q.D2)
+        + 29.86 * max(0.0, Q.mass_over_sum_pt_sq - 0.029)
+        - 0.01145 * max(0.0, Q.mass_top30 - 49.0)
+        - 0.01966 * max(0.0, Q.mass_top50 - 150.0)
+        - 0.06815 * max(0.0, 66.0 - Q.n_particles) * max(0.0, 0.038 - Q.e2)
+        + 0.01325 * max(0.0, 91.2 - Q.mass)
+        - 0.04009 * max(0.0, 100.0 - Q.mass)
+        + 36.46 * max(0.0, 0.026 - Q.e2)
+        - 0.02876 * max(0.0, 120.0 - Q.mass)
+        - 0.07114 * max(0.0, 9.4 - Q.n_dr_0p2_0p4)
+        + 6.217 * max(0.0, 0.99 - Q.z_top50_slots)
+        + 0.01191 * max(0.0, 100.0 - Q.mass) * max(0.0, 1.6 - Q.D2)
+        + 0.01766 * max(0.0, 91.2 - Q.mass) * max(0.0, 0.39 - Q.max_dr)
+        + 0.2002 * max(0.0, 100.0 - Q.mass) * max(0.0, 0.4 - Q.max_dr)
+        + 0.03028 * max(0.0, 97.0 - Q.mass_top50) * max(0.0, 1.6 - Q.D2)
+        + 4.976 * max(0.0, 0.096 - Q.girth)
+        + 0.007237 * max(0.0, Q.mass - 71.0)
+        + 0.0002828 * max(0.0, Q.mass - 120.0)
+        - 0.01443 * max(0.0, 19.0 - Q.n_dr_0p2_0p4)
+        + 0.03376 * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.05632 * max(0.0, Q.mass_over_sum_pt - 0.085) * max(0.0, 1100.0 - Q.sum_pt)
+        + 0.02466 * max(0.0, 930.0 - Q.sum_pt_top40) * max(0.0, 6.9 - Q.log_sum_pt)
+        + 46.85 * max(0.0, 0.0056 - Q.girth2_top40)
+        - 98.63 * max(0.0, Q.mass_over_sum_pt_sq - 0.026)
+        + 0.000495 * max(0.0, 920.0 - Q.sum_pt_top40)
+        - 0.406 * max(0.0, 0.0094 - Q.girth2_top40) * max(0.0, 1000.0 - Q.sum_pt)
+        - 0.101 * max(0.0, Q.mass - 150.0)
+        + 0.1086 * max(0.0, Q.mass_top50 - 140.0)
+        - 0.09503 * max(0.0, 11.0 - Q.n_dr_0p2_0p4)
+        - 0.01016 * max(0.0, 960.0 - Q.sum_pt_top50)
+        - 8.229 * max(0.0, Q.z_dr_0_0p05 - 0.77)
+        + 15.74 * max(0.0, 0.088 - Q.z_dr_0p2_0p4)
+        + 10.48 * max(0.0, Q.C2 - 0.055)
+        + 0.01852 * max(0.0, 63.0 - Q.mass_top50)
+        - 18.8 * max(0.0, 6.8 - Q.log_sum_pt)
+        + 3.459 * max(0.0, 7.0 - Q.log_sum_pt)
+        + 0.04084 * max(0.0, Q.mass - 140.0)
+        - 0.07344 * max(0.0, Q.mass - 172.8)
+        - 0.01856 * max(0.0, 1000.0 - Q.sum_pt_top40)
+        - 0.007945 * max(0.0, 130.0 - Q.mass)
     )
 
 
@@ -589,667 +454,148 @@ def scores(Q):
 
 
 def decide(Q, s):
-    if s['q'] - s['W'] > -1.4963955879211426:
-        if s['q'] - s['Z'] > -0.8536352217197418:
-            if s['g'] - s['t'] > -0.28608983755111694:
-                if s['g'] - s['q'] > -0.00107462058076635:
-                    if s['g'] - s['W'] > -0.128572516143322:
-                        if s['g'] - s['t'] > 0.08292904868721962:
-                            if s['g'] - s['Z'] > 0.29883530735969543:
-                                if s['g'] - s['q'] > 0.07113382965326309:
-                                    if s['g'] - s['t'] > 0.5032555758953094:
-                                        if s['g'] - s['W'] > 0.11539756879210472:
-                                            if Q.max_dr > 0.4968833923339844:
-                                                if s['g'] - s['q'] > 0.5118412375450134:
-                                                    if s['g'] - s['Z'] > 2.283942699432373:
-                                                        return 'g'   # 98% of the training jets here get this class from the formula
-                                                    else:
-                                                        if s['g'] - s['Z'] > 1.0487703680992126:
-                                                            if s['g'] - s['W'] > 1.1423208713531494:
-                                                                return 'g'   # 77% of the training jets here get this class from the formula
-                                                            else:
-                                                                return 'W'   # 68% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 'Z'   # 71% of the training jets here get this class from the formula
-                                                else:
-                                                    if Q.max_dr > 0.5905841588973999:
-                                                        return 'g'   # 79% of the training jets here get this class from the formula
-                                                    else:
-                                                        if Q.mass > 64.96455764770508:
-                                                            return 'g'   # 35% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 'q'   # 71% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.sum_pt_top40 > 809.287109375:
-                                                    if s['g'] - s['Z'] > 0.5813725590705872:
-                                                        if Q.z_top50_slots > 0.9278044402599335:
-                                                            return 'g'   # 100% of the training jets here get this class from the formula
-                                                        else:
-                                                            if s['g'] - s['q'] > 2.8985371589660645:
-                                                                return 'g'   # 99% of the training jets here get this class from the formula
-                                                            else:
-                                                                if Q.sum_pt > 1003.7939453125:
-                                                                    if s['g'] - s['q'] > 1.9131689071655273:
-                                                                        return 'g'   # 80% of the training jets here get this class from the formula
-                                                                    else:
-                                                                        return 't'   # 63% of the training jets here get this class from the formula
-                                                                else:
-                                                                    return 'g'   # 92% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 'g'   # 85% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'g'   # 93% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.C2 > 0.06414096057415009:
-                                                if Q.max_dr > 0.3529297262430191:
-                                                    return 'g'   # 74% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'W'   # 57% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 87% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.sum_pt_top50 > 895.65283203125:
-                                            if s['q'] - s['Z'] > 1.5953343510627747:
-                                                if Q.lam1 > 0.03237444534897804:
-                                                    if Q.sum_pt_top40 > 898.619140625:
-                                                        return 'g'   # 91% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 't'   # 75% of the training jets here get this class from the formula
-                                                else:
-                                                    if Q.sum_pt_top50 > 912.2451171875:
-                                                        return 'g'   # 96% of the training jets here get this class from the formula
-                                                    else:
-                                                        if Q.n_dr_0p2_0p4 > 20.5:
-                                                            return 't'   # 66% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 'g'   # 90% of the training jets here get this class from the formula
-                                            else:
-                                                if s['g'] - s['t'] > 0.2621142268180847:
-                                                    return 'g'   # 87% of the training jets here get this class from the formula
-                                                else:
-                                                    if Q.log_sum_pt > 6.935274124145508:
-                                                        if Q.lam1 > 0.010406507179141045:
-                                                            if Q.mass > 215.8578338623047:
-                                                                return 't'   # 73% of the training jets here get this class from the formula
-                                                            else:
-                                                                if Q.log_sum_pt > 7.132404327392578:
-                                                                    return 't'   # 67% of the training jets here get this class from the formula
-                                                                else:
-                                                                    return 'g'   # 89% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 't'   # 65% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 'g'   # 89% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.mass_over_sum_pt_sq > 0.009740718174725771:
-                                                if Q.sum_pt_top40 > 771.03125:
-                                                    if s['Z'] - s['t'] > -5.841248273849487:
-                                                        if Q.n_dr_0p2_0p4 > 11.5:
-                                                            return 't'   # 63% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 'g'   # 79% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 't'   # 82% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'g'   # 66% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 93% of the training jets here get this class from the formula
+    if s['q'] - s['W'] > -1.5274686813354492:
+        if s['q'] - s['Z'] > -0.9933307468891144:
+            if s['g'] - s['t'] > -0.38557903468608856:
+                if s['g'] - s['q'] > -0.046488167718052864:
+                    if s['g'] - s['t'] > 0.28840479254722595:
+                        if s['g'] - s['W'] > 0.09397090971469879:
+                            if s['g'] - s['q'] > 0.31094391644001007:
+                                if s['g'] - s['Z'] > 0.4498296529054642:
+                                    return 'g'   # 98% of the training jets here get this class from the formula
                                 else:
-                                    if Q.max_dr > 0.4588704854249954:
-                                        if Q.max_dr > 0.6032905280590057:
-                                            return 'g'   # 58% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 87% of the training jets here get this class from the formula
-                                    else:
-                                        if s['g'] - s['q'] > 0.03661065921187401:
-                                            return 'g'   # 81% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.girth > 0.03481720946729183:
-                                                return 'g'   # 75% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.sum_pt > 998.6845703125:
-                                                    return 'g'   # 61% of the training jets here get this class from the formula
-                                                else:
-                                                    if Q.mass_top30 > 39.455020904541016:
-                                                        return 'g'   # 77% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 'q'   # 79% of the training jets here get this class from the formula
-                            else:
-                                if s['g'] - s['W'] > 3.3040443658828735:
-                                    if s['g'] - s['q'] > 0.18183543533086777:
-                                        return 'g'   # 85% of the training jets here get this class from the formula
-                                    else:
-                                        return 'Z'   # 51% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 76% of the training jets here get this class from the formula
-                        else:
-                            if Q.sum_pt_top50 > 930.3232421875:
-                                if Q.sum_pt_top40 > 987.8349609375:
-                                    if Q.z_dr_0p2_0p4 > 0.07214105129241943:
-                                        if s['g'] - s['t'] > -0.09046154096722603:
-                                            if Q.sum_pt_top50 > 1217.52734375:
-                                                return 't'   # 56% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 87% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.mass > 181.7289276123047:
-                                                return 'g'   # 87% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.mass > 160.57009887695312:
-                                                    if Q.mass_top30 > 161.07791137695312:
-                                                        return 'g'   # 68% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 't'   # 85% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'g'   # 52% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.e2 > 0.05691978149116039:
-                                            return 'g'   # 88% of the training jets here get this class from the formula
-                                        else:
-                                            if s['g'] - s['t'] > -0.03417224995791912:
-                                                if s['W'] - s['Z'] > -0.09822221845388412:
-                                                    return 'g'   # 61% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 68% of the training jets here get this class from the formula
-                                            else:
-                                                return 't'   # 86% of the training jets here get this class from the formula
-                                else:
-                                    if Q.lam1 > 0.023123398423194885:
-                                        if s['g'] - s['q'] > 2.5212098360061646:
-                                            return 'g'   # 82% of the training jets here get this class from the formula
-                                        else:
-                                            return 't'   # 70% of the training jets here get this class from the formula
-                                    else:
-                                        if s['g'] - s['Z'] > -0.1003105565905571:
-                                            if s['g'] - s['t'] > -0.18430238217115402:
-                                                return 'g'   # 87% of the training jets here get this class from the formula
-                                            else:
-                                                if s['g'] - s['Z'] > 3.6790703535079956:
-                                                    return 'g'   # 79% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 53% of the training jets here get this class from the formula
-                                        else:
-                                            return 'Z'   # 71% of the training jets here get this class from the formula
-                            else:
-                                if Q.sum_pt_top40 > 771.39453125:
-                                    if Q.mass_top40 > 74.75468063354492:
-                                        if Q.log_sum_pt > 6.864191055297852:
-                                            if Q.mass_over_sum_pt_sq > 0.02004402596503496:
-                                                return 't'   # 79% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 75% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.mass_over_sum_pt > 0.1582920253276825:
-                                                if Q.sum_pt_top50 > 861.1494140625:
-                                                    return 't'   # 83% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'g'   # 64% of the training jets here get this class from the formula
-                                            else:
-                                                return 't'   # 88% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 61% of the training jets here get this class from the formula
-                                else:
-                                    if s['W'] - s['t'] > -4.700120210647583:
-                                        return 't'   # 85% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 60% of the training jets here get this class from the formula
-                    else:
-                        if s['g'] - s['W'] > -0.48492351174354553:
-                            if Q.C2 > 0.050499362871050835:
-                                if s['W'] - s['Z'] > 0.4695819467306137:
-                                    if Q.log_sum_pt > 6.888311862945557:
-                                        return 'W'   # 77% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 67% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 57% of the training jets here get this class from the formula
-                            else:
-                                if Q.mass_top50 > 76.00655364990234:
-                                    return 'W'   # 78% of the training jets here get this class from the formula
-                                else:
-                                    return 'g'   # 70% of the training jets here get this class from the formula
-                        else:
-                            return 'W'   # 94% of the training jets here get this class from the formula
-                else:
-                    if s['q'] - s['W'] > 0.003918800735846162:
-                        if s['q'] - s['Z'] > 0.3340637981891632:
-                            if s['g'] - s['q'] > -0.07538343220949173:
-                                if Q.mass_over_sum_pt_sq > 0.004148927284404635:
-                                    if Q.mass > 72.10356521606445:
-                                        if Q.e2 > 0.02494984772056341:
-                                            return 'g'   # 44% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 81% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 57% of the training jets here get this class from the formula
-                                else:
-                                    if Q.girth > 0.011463042814284563:
-                                        if Q.max_dr > 0.5855439603328705:
-                                            return 'g'   # 63% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 82% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 59% of the training jets here get this class from the formula
-                            else:
-                                if s['q'] - s['W'] > 0.37556028366088867:
-                                    return 'q'   # 99% of the training jets here get this class from the formula
-                                else:
-                                    if Q.C2 > 0.08372889831662178:
-                                        if Q.planar_flow > 0.41204534471035004:
-                                            return 'q'   # 72% of the training jets here get this class from the formula
-                                        else:
-                                            if s['q'] - s['W'] > 0.20257285982370377:
-                                                return 'q'   # 50% of the training jets here get this class from the formula
-                                            else:
-                                                return 'W'   # 80% of the training jets here get this class from the formula
-                                    else:
-                                        return 'q'   # 90% of the training jets here get this class from the formula
-                        else:
-                            if s['q'] - s['W'] > 3.0338000059127808:
-                                if s['q'] - s['Z'] > -0.3201216161251068:
-                                    return 'q'   # 76% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 70% of the training jets here get this class from the formula
-                            else:
-                                if s['q'] - s['t'] > 3.8192137479782104:
-                                    return 'q'   # 77% of the training jets here get this class from the formula
-                                else:
-                                    if Q.sum_pt > 973.212158203125:
-                                        return 'Z'   # 93% of the training jets here get this class from the formula
-                                    else:
-                                        return 'q'   # 67% of the training jets here get this class from the formula
-                    else:
-                        if s['q'] - s['W'] > -0.3451625406742096:
-                            if Q.C2 > 0.06667853891849518:
-                                if s['W'] - s['Z'] > 0.4226732403039932:
-                                    if Q.girth2_top40 > 0.005541962571442127:
-                                        return 'q'   # 62% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.tau32 > 0.4733220785856247:
-                                            if Q.C2 > 0.08146339654922485:
-                                                if Q.mass > 77.18021392822266:
-                                                    return 'q'   # 59% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'W'   # 88% of the training jets here get this class from the formula
-                                            else:
-                                                if s['q'] - s['W'] > -0.055159829556941986:
-                                                    return 'q'   # 70% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'W'   # 74% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 65% of the training jets here get this class from the formula
-                                else:
-                                    if Q.mass_top40 > 73.99081802368164:
-                                        return 'Z'   # 92% of the training jets here get this class from the formula
-                                    else:
-                                        return 'W'   # 44% of the training jets here get this class from the formula
-                            else:
-                                if Q.mass_over_sum_pt_sq > 0.00481291301548481:
-                                    if s['W'] - s['Z'] > 0.6834098398685455:
-                                        return 'W'   # 63% of the training jets here get this class from the formula
+                                    if s['g'] - s['W'] > 3.17938768863678:
+                                        return 'g'   # 80% of the training jets here get this class from the formula
                                     else:
                                         return 'Z'   # 60% of the training jets here get this class from the formula
+                            else:
+                                if Q.tau32 > 0.807975560426712:
+                                    if s['g'] - s['Z'] > 0.3642248958349228:
+                                        return 'g'   # 82% of the training jets here get this class from the formula
+                                    else:
+                                        return 'Z'   # 72% of the training jets here get this class from the formula
                                 else:
-                                    return 'q'   # 87% of the training jets here get this class from the formula
+                                    if s['q'] - s['Z'] > 0.20387019217014313:
+                                        if Q.n_particles > 47.5:
+                                            if Q.tau32 > 0.7308608293533325:
+                                                return 'g'   # 69% of the training jets here get this class from the formula
+                                            else:
+                                                return 'q'   # 53% of the training jets here get this class from the formula
+                                        else:
+                                            return 'q'   # 69% of the training jets here get this class from the formula
+                                    else:
+                                        return 'Z'   # 82% of the training jets here get this class from the formula
                         else:
-                            if s['W'] - s['Z'] > 0.27454225718975067:
-                                if Q.mass > 68.48222351074219:
-                                    if s['W'] - s['Z'] > 0.617315262556076:
-                                        if s['q'] - s['W'] > -0.5979351103305817:
-                                            if Q.C2 > 0.058056045323610306:
-                                                return 'W'   # 94% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.mass_over_sum_pt > 0.06943634897470474:
-                                                    return 'W'   # 93% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'q'   # 53% of the training jets here get this class from the formula
-                                        else:
-                                            return 'W'   # 99% of the training jets here get this class from the formula
-                                    else:
-                                        return 'W'   # 67% of the training jets here get this class from the formula
+                            if s['g'] - s['W'] > -0.5068084597587585:
+                                if Q.tau32 > 0.7755908370018005:
+                                    return 'g'   # 68% of the training jets here get this class from the formula
                                 else:
-                                    if Q.D2 > 3.2608678340911865:
-                                        return 'W'   # 95% of the training jets here get this class from the formula
-                                    else:
-                                        if s['q'] - s['W'] > -0.7381367683410645:
-                                            return 'q'   # 76% of the training jets here get this class from the formula
-                                        else:
-                                            return 'W'   # 71% of the training jets here get this class from the formula
+                                    return 'W'   # 64% of the training jets here get this class from the formula
                             else:
-                                if Q.D2 > 3.1799428462982178:
-                                    return 'Z'   # 88% of the training jets here get this class from the formula
-                                else:
-                                    return 'W'   # 75% of the training jets here get this class from the formula
-            else:
-                if s['q'] - s['t'] > -0.29957129061222076:
-                    if s['q'] - s['W'] > -0.3566359579563141:
-                        if s['q'] - s['Z'] > 0.2620798647403717:
-                            if s['q'] - s['t'] > -0.06449944525957108:
-                                if s['q'] - s['W'] > 0.0011212142708245665:
-                                    if s['q'] - s['Z'] > 1.3787073493003845:
-                                        return 'q'   # 96% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.log_sum_pt > 6.845154762268066:
-                                            if Q.sum_pt > 1058.382568359375:
-                                                return 'q'   # 50% of the training jets here get this class from the formula
-                                            else:
-                                                if s['q'] - s['W'] > 0.41714687645435333:
-                                                    return 'q'   # 88% of the training jets here get this class from the formula
-                                                else:
-                                                    if Q.planar_flow > 0.43619735538959503:
-                                                        return 'q'   # 82% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 'W'   # 61% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.mass_top40 > 81.1951675415039:
-                                                return 't'   # 84% of the training jets here get this class from the formula
-                                            else:
-                                                return 'q'   # 90% of the training jets here get this class from the formula
-                                else:
-                                    if Q.D2 > 2.9682668447494507:
-                                        if Q.mass > 75.91050338745117:
-                                            return 'q'   # 60% of the training jets here get this class from the formula
-                                        else:
-                                            return 'W'   # 76% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.mass > 77.35036087036133:
-                                            return 'W'   # 67% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 83% of the training jets here get this class from the formula
-                            else:
-                                if Q.C2 > 0.08887634798884392:
-                                    if Q.sum_pt > 954.492919921875:
-                                        return 'q'   # 80% of the training jets here get this class from the formula
-                                    else:
-                                        return 't'   # 72% of the training jets here get this class from the formula
-                                else:
-                                    if s['q'] - s['t'] > -0.18025699257850647:
-                                        return 'q'   # 61% of the training jets here get this class from the formula
-                                    else:
-                                        if s['W'] - s['Z'] > 0.7100329697132111:
-                                            if Q.mass_over_sum_pt > 0.07573346793651581:
-                                                return 'q'   # 72% of the training jets here get this class from the formula
-                                            else:
-                                                return 't'   # 71% of the training jets here get this class from the formula
-                                        else:
-                                            return 't'   # 71% of the training jets here get this class from the formula
-                        else:
-                            if s['q'] - s['W'] > 2.8078527450561523:
-                                if Q.sum_pt > 979.8701171875:
-                                    if s['q'] - s['Z'] > -0.21260308474302292:
-                                        return 'q'   # 68% of the training jets here get this class from the formula
-                                    else:
-                                        return 'Z'   # 85% of the training jets here get this class from the formula
-                                else:
-                                    if Q.sum_pt_top40 > 938.47705078125:
-                                        return 'q'   # 78% of the training jets here get this class from the formula
-                                    else:
-                                        return 't'   # 66% of the training jets here get this class from the formula
-                            else:
-                                if s['q'] - s['Z'] > -0.08258986845612526:
-                                    if s['q'] - s['t'] > -0.07318798452615738:
-                                        return 'Z'   # 58% of the training jets here get this class from the formula
-                                    else:
-                                        return 't'   # 55% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 92% of the training jets here get this class from the formula
+                                return 'W'   # 87% of the training jets here get this class from the formula
                     else:
-                        if s['W'] - s['Z'] > 0.01290874369442463:
-                            if Q.mass > 68.5615463256836:
-                                if s['W'] - s['Z'] > 0.5755650997161865:
-                                    return 'W'   # 96% of the training jets here get this class from the formula
-                                else:
-                                    if Q.D2 > 3.2872127294540405:
-                                        return 'Z'   # 69% of the training jets here get this class from the formula
-                                    else:
-                                        return 'W'   # 92% of the training jets here get this class from the formula
-                            else:
-                                if s['q'] - s['W'] > -0.9190081059932709:
-                                    if Q.girth > 0.03843960165977478:
-                                        if s['g'] - s['Z'] > 1.7702742218971252:
-                                            return 'W'   # 82% of the training jets here get this class from the formula
-                                        else:
-                                            return 'q'   # 75% of the training jets here get this class from the formula
-                                    else:
-                                        return 'W'   # 92% of the training jets here get this class from the formula
-                                else:
-                                    return 'W'   # 86% of the training jets here get this class from the formula
-                        else:
-                            return 'Z'   # 85% of the training jets here get this class from the formula
-                else:
-                    if s['W'] - s['t'] > -0.27015355229377747:
-                        if s['W'] - s['t'] > 0.001852345303632319:
-                            return 'W'   # 95% of the training jets here get this class from the formula
-                        else:
-                            if s['W'] - s['Z'] > 0.30642005801200867:
-                                return 'W'   # 62% of the training jets here get this class from the formula
-                            else:
-                                return 'Z'   # 59% of the training jets here get this class from the formula
-                    else:
-                        if s['Z'] - s['t'] > -0.25543320178985596:
-                            if s['W'] - s['t'] > -2.5000449419021606:
-                                return 'Z'   # 74% of the training jets here get this class from the formula
-                            else:
-                                if s['q'] - s['t'] > -0.45852600038051605:
-                                    return 'Z'   # 53% of the training jets here get this class from the formula
-                                else:
-                                    return 't'   # 86% of the training jets here get this class from the formula
-                        else:
-                            if Q.sum_pt_top40 > 794.697998046875:
-                                if s['q'] - s['t'] > -0.4455859661102295:
-                                    if Q.C2 > 0.09575581178069115:
-                                        if Q.log_sum_pt > 6.873748064041138:
-                                            if s['q'] - s['t'] > -0.353540301322937:
-                                                return 'q'   # 71% of the training jets here get this class from the formula
-                                            else:
-                                                return 't'   # 60% of the training jets here get this class from the formula
-                                        else:
-                                            return 't'   # 91% of the training jets here get this class from the formula
-                                    else:
-                                        if Q.max_dr > 0.4646214544773102:
-                                            return 'q'   # 49% of the training jets here get this class from the formula
-                                        else:
-                                            return 't'   # 88% of the training jets here get this class from the formula
-                                else:
-                                    if s['g'] - s['t'] > -0.47444772720336914:
-                                        if Q.e2 > 0.06271159276366234:
-                                            return 't'   # 51% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.sum_pt_top40 > 963.66796875:
-                                                if Q.mass > 188.8658447265625:
-                                                    return 'g'   # 58% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 96% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.log_sum_pt > 6.883631706237793:
-                                                    if Q.tau21 > 0.382577583193779:
-                                                        if Q.lam1 > 0.019387438893318176:
-                                                            return 't'   # 78% of the training jets here get this class from the formula
-                                                        else:
-                                                            return 'g'   # 54% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 't'   # 86% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 90% of the training jets here get this class from the formula
-                                    else:
-                                        if s['g'] - s['W'] > -2.143823981285095:
-                                            if s['Z'] - s['t'] > -0.4568393975496292:
-                                                if Q.mass > 85.47290802001953:
-                                                    return 't'   # 87% of the training jets here get this class from the formula
-                                                else:
-                                                    return 'Z'   # 61% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.lam1 > 0.032525982707738876:
-                                                    if s['g'] - s['W'] > 4.3258466720581055:
-                                                        if Q.sum_pt > 953.01171875:
-                                                            return 't'   # 94% of the training jets here get this class from the formula
-                                                        else:
-                                                            if s['g'] - s['q'] > 0.036663519218564034:
-                                                                if Q.sum_pt_top50 > 888.8779296875:
-                                                                    return 'g'   # 77% of the training jets here get this class from the formula
-                                                                else:
-                                                                    return 't'   # 79% of the training jets here get this class from the formula
-                                                            else:
-                                                                return 'q'   # 62% of the training jets here get this class from the formula
-                                                    else:
-                                                        return 't'   # 96% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 100% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.mass_top50 > 79.53450393676758:
-                                                return 't'   # 85% of the training jets here get this class from the formula
-                                            else:
-                                                if Q.lam1 > 0.005969781195744872:
-                                                    return 'W'   # 71% of the training jets here get this class from the formula
-                                                else:
-                                                    return 't'   # 82% of the training jets here get this class from the formula
-                            else:
-                                if s['g'] - s['t'] > -0.8770895004272461:
-                                    if s['Z'] - s['t'] > -6.293356657028198:
-                                        if Q.girth2_top40 > 0.012567794881761074:
-                                            if Q.girth2_top5 > 0.011798685416579247:
-                                                return 't'   # 71% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 52% of the training jets here get this class from the formula
-                                        else:
-                                            return 't'   # 93% of the training jets here get this class from the formula
-                                    else:
-                                        return 'g'   # 55% of the training jets here get this class from the formula
-                                else:
-                                    if Q.mass_top40 > 105.94844055175781:
-                                        return 't'   # 95% of the training jets here get this class from the formula
-                                    else:
-                                        if s['q'] - s['t'] > -1.2975984811782837:
-                                            if Q.mass_top30 > 89.09163284301758:
-                                                return 'q'   # 62% of the training jets here get this class from the formula
-                                            else:
-                                                return 't'   # 74% of the training jets here get this class from the formula
-                                        else:
-                                            if Q.sum_pt_top40 > 635.529296875:
-                                                return 't'   # 82% of the training jets here get this class from the formula
-                                            else:
-                                                return 'g'   # 41% of the training jets here get this class from the formula
-        else:
-            if s['g'] - s['Z'] > -0.09809532389044762:
-                if s['g'] - s['Z'] > 0.2896324098110199:
-                    if Q.max_dr > 0.4619872570037842:
-                        if s['g'] - s['t'] > 3.3493112325668335:
-                            return 'g'   # 91% of the training jets here get this class from the formula
-                        else:
-                            return 'Z'   # 66% of the training jets here get this class from the formula
-                    else:
-                        return 'g'   # 98% of the training jets here get this class from the formula
-                else:
-                    if s['q'] - s['W'] > 1.8304216861724854:
-                        return 'g'   # 86% of the training jets here get this class from the formula
-                    else:
-                        return 'Z'   # 64% of the training jets here get this class from the formula
-            else:
-                if s['Z'] - s['t'] > 0.09877293184399605:
-                    if s['W'] - s['Z'] > -0.08607592433691025:
-                        if Q.D2 > 3.909511923789978:
-                            return 'Z'   # 84% of the training jets here get this class from the formula
-                        else:
-                            if s['W'] - s['Z'] > 0.18476970493793488:
-                                return 'W'   # 97% of the training jets here get this class from the formula
-                            else:
-                                if Q.mass > 84.59238815307617:
-                                    return 'W'   # 82% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 57% of the training jets here get this class from the formula
-                    else:
-                        if s['g'] - s['W'] > 4.168320417404175:
-                            if s['g'] - s['Z'] > -0.6429811120033264:
-                                if s['q'] - s['W'] > 2.1525949239730835:
-                                    return 'g'   # 78% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 90% of the training jets here get this class from the formula
-                            else:
-                                if s['W'] - s['t'] > -3.7090580463409424:
-                                    return 'Z'   # 81% of the training jets here get this class from the formula
-                                else:
-                                    return 'g'   # 59% of the training jets here get this class from the formula
-                        else:
-                            if s['W'] - s['t'] > -3.9256511926651:
-                                if s['Z'] - s['t'] > 0.3933851718902588:
-                                    if Q.sum_pt_top50 > 907.490234375:
-                                        return 'Z'   # 100% of the training jets here get this class from the formula
-                                    else:
-                                        return 't'   # 51% of the training jets here get this class from the formula
-                                else:
-                                    if s['W'] - s['t'] > -3.368917465209961:
-                                        return 'Z'   # 86% of the training jets here get this class from the formula
-                                    else:
-                                        return 't'   # 50% of the training jets here get this class from the formula
-                            else:
-                                if s['Z'] - s['t'] > 0.4564370959997177:
-                                    return 'Z'   # 79% of the training jets here get this class from the formula
-                                else:
-                                    return 't'   # 85% of the training jets here get this class from the formula
-                else:
-                    if s['W'] - s['t'] > -2.6663286685943604:
-                        if s['Z'] - s['t'] > -0.16112418472766876:
-                            if s['W'] - s['Z'] > -0.19553394615650177:
-                                return 'W'   # 93% of the training jets here get this class from the formula
-                            else:
-                                if Q.sum_pt_top40 > 1005.1258544921875:
-                                    return 't'   # 64% of the training jets here get this class from the formula
-                                else:
-                                    return 'Z'   # 79% of the training jets here get this class from the formula
-                        else:
-                            if Q.n_dr_0p2_0p4 > 4.5:
-                                return 't'   # 89% of the training jets here get this class from the formula
-                            else:
-                                return 'Z'   # 53% of the training jets here get this class from the formula
-                    else:
-                        return 't'   # 97% of the training jets here get this class from the formula
-    else:
-        if s['W'] - s['Z'] > 0.033476075157523155:
-            if s['g'] - s['W'] > -0.07888580486178398:
-                if s['g'] - s['W'] > 0.2817249596118927:
-                    return 'g'   # 96% of the training jets here get this class from the formula
-                else:
-                    if Q.z_top50_slots > 0.9997511506080627:
-                        return 'W'   # 73% of the training jets here get this class from the formula
-                    else:
-                        if Q.max_dr > 0.24389838427305222:
-                            return 'g'   # 78% of the training jets here get this class from the formula
-                        else:
-                            return 'W'   # 75% of the training jets here get this class from the formula
-            else:
-                if s['W'] - s['t'] > -0.34637783467769623:
-                    if s['W'] - s['Z'] > 0.2706206738948822:
-                        return 'W'   # 100% of the training jets here get this class from the formula
-                    else:
-                        if Q.max_dr > 0.2558833211660385:
-                            if Q.mass > 84.47722625732422:
-                                return 'W'   # 90% of the training jets here get this class from the formula
-                            else:
+                        if s['g'] - s['t'] > -0.06787879765033722:
+                            if s['Z'] - s['t'] > 0.017689605243504047:
                                 return 'Z'   # 57% of the training jets here get this class from the formula
+                            else:
+                                if Q.sum_pt_top40 > 838.2470703125:
+                                    if s['g'] - s['W'] > -0.5308825969696045:
+                                        return 'g'   # 68% of the training jets here get this class from the formula
+                                    else:
+                                        return 'W'   # 82% of the training jets here get this class from the formula
+                                else:
+                                    return 't'   # 55% of the training jets here get this class from the formula
                         else:
-                            return 'Z'   # 85% of the training jets here get this class from the formula
+                            if Q.z_dr_0_0p05 > 0.16749460250139236:
+                                return 'g'   # 51% of the training jets here get this class from the formula
+                            else:
+                                return 't'   # 65% of the training jets here get this class from the formula
                 else:
-                    if Q.z_dr_0p2_0p4 > 0.002772988402284682:
-                        return 't'   # 87% of the training jets here get this class from the formula
+                    if s['q'] - s['W'] > -0.02285820059478283:
+                        if s['q'] - s['Z'] > 0.31651023030281067:
+                            if s['g'] - s['q'] > -0.3339899629354477:
+                                if Q.tau32 > 0.8536834716796875:
+                                    if Q.n_particles > 42.5:
+                                        return 'g'   # 56% of the training jets here get this class from the formula
+                                    else:
+                                        return 'q'   # 67% of the training jets here get this class from the formula
+                                else:
+                                    return 'q'   # 81% of the training jets here get this class from the formula
+                            else:
+                                return 'q'   # 98% of the training jets here get this class from the formula
+                        else:
+                            return 'Z'   # 84% of the training jets here get this class from the formula
                     else:
-                        return 'W'   # 70% of the training jets here get this class from the formula
-        else:
-            if s['Z'] - s['t'] > 0.7507397830486298:
-                if s['W'] - s['Z'] > -0.055002426728606224:
-                    if s['Z'] - s['t'] > 1.4437920451164246:
-                        return 'Z'   # 79% of the training jets here get this class from the formula
-                    else:
-                        return 'W'   # 78% of the training jets here get this class from the formula
-                else:
-                    return 'Z'   # 100% of the training jets here get this class from the formula
+                        if s['q'] - s['W'] > -0.5135298669338226:
+                            if s['q'] - s['Z'] > -0.07740594074130058:
+                                if Q.C2 > 0.06030937843024731:
+                                    return 'W'   # 72% of the training jets here get this class from the formula
+                                else:
+                                    if Q.mass_over_sum_pt > 0.0697394497692585:
+                                        return 'W'   # 66% of the training jets here get this class from the formula
+                                    else:
+                                        return 'q'   # 78% of the training jets here get this class from the formula
+                            else:
+                                return 'Z'   # 88% of the training jets here get this class from the formula
+                        else:
+                            if s['W'] - s['Z'] > 0.5723769664764404:
+                                return 'W'   # 94% of the training jets here get this class from the formula
+                            else:
+                                return 'Z'   # 52% of the training jets here get this class from the formula
             else:
-                if s['W'] - s['t'] > -0.08018423616886139:
-                    if s['W'] - s['Z'] > -0.2430310919880867:
-                        return 'W'   # 85% of the training jets here get this class from the formula
+                if s['q'] - s['t'] > -0.2771860957145691:
+                    if s['q'] - s['W'] > -0.24047749489545822:
+                        if s['q'] - s['Z'] > 0.10031677410006523:
+                            return 'q'   # 80% of the training jets here get this class from the formula
+                        else:
+                            return 'Z'   # 79% of the training jets here get this class from the formula
                     else:
-                        return 'Z'   # 79% of the training jets here get this class from the formula
+                        if s['W'] - s['Z'] > 0.12007712572813034:
+                            return 'W'   # 86% of the training jets here get this class from the formula
+                        else:
+                            return 'Z'   # 73% of the training jets here get this class from the formula
                 else:
-                    return 'Z'   # 48% of the training jets here get this class from the formula
+                    if s['W'] - s['t'] > -0.2980353385210037:
+                        return 'W'   # 76% of the training jets here get this class from the formula
+                    else:
+                        if s['q'] - s['t'] > -0.7208874523639679:
+                            if s['Z'] - s['t'] > -0.17412148416042328:
+                                return 'Z'   # 64% of the training jets here get this class from the formula
+                            else:
+                                return 't'   # 76% of the training jets here get this class from the formula
+                        else:
+                            return 't'   # 98% of the training jets here get this class from the formula
+        else:
+            if s['g'] - s['Z'] > -0.15131960064172745:
+                return 'g'   # 90% of the training jets here get this class from the formula
+            else:
+                if s['Z'] - s['t'] > 0.2827135771512985:
+                    if s['g'] - s['W'] > 3.848861813545227:
+                        return 'Z'   # 53% of the training jets here get this class from the formula
+                    else:
+                        if s['W'] - s['Z'] > -0.07377605885267258:
+                            return 'W'   # 60% of the training jets here get this class from the formula
+                        else:
+                            return 'Z'   # 99% of the training jets here get this class from the formula
+                else:
+                    if s['W'] - s['t'] > -3.4343351125717163:
+                        if s['Z'] - s['t'] > -0.38466696441173553:
+                            return 'Z'   # 57% of the training jets here get this class from the formula
+                        else:
+                            return 't'   # 86% of the training jets here get this class from the formula
+                    else:
+                        return 't'   # 94% of the training jets here get this class from the formula
+    else:
+        if s['W'] - s['Z'] > 0.12177802994847298:
+            if s['g'] - s['W'] > -0.28376777470111847:
+                return 'g'   # 76% of the training jets here get this class from the formula
+            else:
+                if s['W'] - s['t'] > -0.26000499725341797:
+                    return 'W'   # 100% of the training jets here get this class from the formula
+                else:
+                    return 't'   # 63% of the training jets here get this class from the formula
+        else:
+            return 'Z'   # 98% of the training jets here get this class from the formula
 
 
 def classify(pt, eta, phi):

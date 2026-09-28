@@ -74,14 +74,14 @@ The formula builds five scores from 16 neurons, each of which is effectively a s
 
 Regimes (a small tree on its quantities; R² 0.69):
 
-- `log_sum_pt > 7 and n_particles > 47.5 and mass_top10 ≤ 35.1` — 5.9% of jets, value 7.76 (5.75…9.72), formula right 92%
-- `log_sum_pt > 7 and n_particles > 47.5 and mass_top10 > 35.1` — 5.4% of jets, value 5.83 (3.53…8.03), formula right 78%
-- `log_sum_pt > 7.09 and n_particles ≤ 47.5` — 2.2% of jets, value 5.11 (3.28…7.19), formula right 78%
-- `log_sum_pt ≤ 7 and n_particles > 54.5 and mass_top10 ≤ 33.5` — 7.1% of jets, value 5.04 (3.16…6.88), formula right 69%
-- `7 < log_sum_pt ≤ 7.09 and n_particles ≤ 47.5` — 4.7% of jets, value 3.28 (1.92…5.12), formula right 78%
-- `log_sum_pt ≤ 7 and n_particles > 54.5 and mass_top10 > 33.5` — 18.6% of jets, value 3.11 (1.38…4.94), formula right 79%
-- `log_sum_pt ≤ 7 and n_particles ≤ 54.5 and n_real_top40 > 39.5` — 23.6% of jets, value 1.97 (0.34…3.81), formula right 80%
-- `log_sum_pt ≤ 7 and n_particles ≤ 54.5 and n_real_top40 ≤ 39.5` — 32.6% of jets, value 1.03 (0.00…2.31), formula right 85%
+- `` — 5.9% of jets, value 7.76 (5.75…9.72), formula right 92%
+- `` — 5.4% of jets, value 5.83 (3.53…8.03), formula right 78%
+- `` — 2.2% of jets, value 5.11 (3.28…7.19), formula right 78%
+- `` — 7.1% of jets, value 5.04 (3.16…6.88), formula right 69%
+- `` — 4.7% of jets, value 3.28 (1.92…5.12), formula right 78%
+- `` — 18.6% of jets, value 3.11 (1.38…4.94), formula right 79%
+- `` — 23.6% of jets, value 1.97 (0.34…3.81), formula right 80%
+- `` — 32.6% of jets, value 1.03 (0.00…2.31), formula right 85%
 
 ```
 z = 2.19
@@ -147,14 +147,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.748):
 
-- `mass_top40 > 74.5 and n_particles ≤ 47.5 and max_dr ≤ 0.317` — 13.6% of jets, value 2.21 (1.75…2.69), formula right 96%
-- `mass_top40 > 74.5 and n_particles > 47.5 and tau32 ≤ 0.441` — 8.0% of jets, value 1.76 (1.06…2.44), formula right 93%
-- `mass_top40 > 74.5 and n_particles ≤ 47.5 and max_dr > 0.317` — 19.2% of jets, value 1.61 (0.75…2.19), formula right 85%
-- `mass_top40 > 74.5 and n_particles > 47.5 and tau32 > 0.441` — 24.9% of jets, value 0.86 (0.00…1.69), formula right 76%
-- `mass_top40 ≤ 74.5 and mass > 73.2 and max_dr ≤ 0.355` — 2.0% of jets, value 0.79 (0.07…1.44), formula right 78%
-- `mass_top40 ≤ 74.5 and mass > 73.2 and max_dr > 0.355` — 3.4% of jets, value 0.27 (0.00…0.75), formula right 70%
-- `mass_top40 ≤ 74.5 and 69.1 < mass ≤ 73.2` — 2.0% of jets, value 0.07 (0.00…0.25), formula right 60%
-- `mass_top40 ≤ 74.5 and mass ≤ 69.1` — 26.9% of jets, value 0.00 (0.00…0.00), formula right 74%
+- `` — 13.6% of jets, value 2.21 (1.75…2.69), formula right 96%
+- `` — 8.0% of jets, value 1.76 (1.06…2.44), formula right 93%
+- `` — 19.2% of jets, value 1.61 (0.75…2.19), formula right 85%
+- `` — 24.9% of jets, value 0.86 (0.00…1.69), formula right 76%
+- `` — 2.0% of jets, value 0.79 (0.07…1.44), formula right 78%
+- `` — 3.4% of jets, value 0.27 (0.00…0.75), formula right 70%
+- `` — 2.0% of jets, value 0.07 (0.00…0.25), formula right 60%
+- `` — 26.9% of jets, value 0.00 (0.00…0.00), formula right 74%
 
 ```
 z = 1.87
@@ -218,14 +218,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.567):
 
-- `log_sum_pt ≤ 7 and sum_pt_top50 > 969 and mass_top50 ≤ 160` — 59.0% of jets, value 1.50 (0.81…2.25), formula right 82%
-- `6.86 < log_sum_pt ≤ 7 and sum_pt_top50 ≤ 969` — 6.6% of jets, value 0.78 (0.00…1.44), formula right 76%
-- `7 < log_sum_pt ≤ 7.03 and sum_pt_top3 > 543` — 2.0% of jets, value 0.67 (0.00…1.38), formula right 76%
-- `7 < log_sum_pt ≤ 7.03 and sum_pt_top3 ≤ 543` — 3.6% of jets, value 0.36 (0.00…0.94), formula right 81%
-- `log_sum_pt ≤ 6.86 and sum_pt_top50 ≤ 969` — 10.8% of jets, value 0.26 (0.00…0.69), formula right 73%
-- `log_sum_pt > 7.03 and max_dr > 0.396` — 2.0% of jets, value 0.24 (0.00…0.75), formula right 82%
-- `log_sum_pt ≤ 7 and sum_pt_top50 > 969 and mass_top50 > 160` — 5.1% of jets, value 0.14 (0.00…0.50), formula right 94%
-- `log_sum_pt > 7.03 and max_dr ≤ 0.396` — 10.9% of jets, value 0.02 (0.00…0.00), formula right 84%
+- `` — 59.0% of jets, value 1.50 (0.81…2.25), formula right 82%
+- `` — 6.6% of jets, value 0.78 (0.00…1.44), formula right 76%
+- `` — 2.0% of jets, value 0.67 (0.00…1.38), formula right 76%
+- `` — 3.6% of jets, value 0.36 (0.00…0.94), formula right 81%
+- `` — 10.8% of jets, value 0.26 (0.00…0.69), formula right 73%
+- `` — 2.0% of jets, value 0.24 (0.00…0.75), formula right 82%
+- `` — 5.1% of jets, value 0.14 (0.00…0.50), formula right 94%
+- `` — 10.9% of jets, value 0.02 (0.00…0.00), formula right 84%
 
 ```
 z = -1.06
@@ -285,13 +285,13 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.807):
 
-- `mass_over_sum_pt > 0.13 and sum_pt_top50 ≤ 1e+03` — 11.0% of jets, value 9.27 (5.06…13.69), formula right 85%
-- `0.0992 < mass_over_sum_pt ≤ 0.13 and sum_pt_top50 ≤ 1e+03` — 4.2% of jets, value 6.22 (3.50…9.69), formula right 70%
-- `mass_over_sum_pt > 0.0992 and 1e+03 < sum_pt_top50 ≤ 1.05e+03` — 4.5% of jets, value 5.55 (3.19…7.31), formula right 81%
-- `mass_over_sum_pt ≤ 0.0992 and sum_pt_top40 ≤ 871` — 2.0% of jets, value 4.52 (0.00…9.75), formula right 65%
-- `mass_over_sum_pt > 0.0992 and sum_pt_top50 > 1.05e+03` — 4.8% of jets, value 3.14 (1.88…4.50), formula right 77%
-- `mass_over_sum_pt ≤ 0.0992 and sum_pt_top40 > 871 and lam2 > 0.00094` — 13.9% of jets, value 1.14 (0.00…2.62), formula right 74%
-- `mass_over_sum_pt ≤ 0.0992 and sum_pt_top40 > 871 and lam2 ≤ 0.00094` — 59.5% of jets, value 0.18 (0.00…0.62), formula right 84%
+- `` — 11.0% of jets, value 9.27 (5.06…13.69), formula right 85%
+- `` — 4.2% of jets, value 6.22 (3.50…9.69), formula right 70%
+- `` — 4.5% of jets, value 5.55 (3.19…7.31), formula right 81%
+- `` — 2.0% of jets, value 4.52 (0.00…9.75), formula right 65%
+- `` — 4.8% of jets, value 3.14 (1.88…4.50), formula right 77%
+- `` — 13.9% of jets, value 1.14 (0.00…2.62), formula right 74%
+- `` — 59.5% of jets, value 0.18 (0.00…0.62), formula right 84%
 
 ```
 z = 0.672
@@ -356,14 +356,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.643):
 
-- `z_dr_0_0p05 ≤ 0.782 and e2 > 0.0456 and mass ≤ 179` — 14.8% of jets, value 2.64 (1.62…3.62), formula right 89%
-- `z_dr_0_0p05 ≤ 0.782 and e2 ≤ 0.0456 and max_dr > 0.336` — 25.7% of jets, value 1.69 (0.75…2.56), formula right 76%
-- `z_dr_0_0p05 ≤ 0.782 and e2 ≤ 0.0456 and max_dr ≤ 0.336` — 19.6% of jets, value 1.22 (0.50…1.88), formula right 90%
-- `z_dr_0_0p05 > 0.782 and sum_pt_top10 ≤ 810 and z_dr_0p2_0p4 ≤ 0.0356` — 7.9% of jets, value 0.99 (0.00…1.88), formula right 73%
-- `z_dr_0_0p05 ≤ 0.782 and e2 > 0.0456 and mass > 179` — 2.0% of jets, value 0.62 (0.00…1.88), formula right 77%
-- `0.782 < z_dr_0_0p05 ≤ 0.833 and sum_pt_top10 > 810` — 3.4% of jets, value 0.62 (0.00…1.50), formula right 83%
-- `z_dr_0_0p05 > 0.782 and sum_pt_top10 ≤ 810 and z_dr_0p2_0p4 > 0.0356` — 3.4% of jets, value 0.26 (0.00…0.81), formula right 73%
-- `z_dr_0_0p05 > 0.833 and sum_pt_top10 > 810` — 23.2% of jets, value 0.17 (0.00…0.62), formula right 78%
+- `` — 14.8% of jets, value 2.64 (1.62…3.62), formula right 89%
+- `` — 25.7% of jets, value 1.69 (0.75…2.56), formula right 76%
+- `` — 19.6% of jets, value 1.22 (0.50…1.88), formula right 90%
+- `` — 7.9% of jets, value 0.99 (0.00…1.88), formula right 73%
+- `` — 2.0% of jets, value 0.62 (0.00…1.88), formula right 77%
+- `` — 3.4% of jets, value 0.62 (0.00…1.50), formula right 83%
+- `` — 3.4% of jets, value 0.26 (0.00…0.81), formula right 73%
+- `` — 23.2% of jets, value 0.17 (0.00…0.62), formula right 78%
 
 ```
 z = 4.78
@@ -426,13 +426,13 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.835):
 
-- `mass ≤ 85.2 and girth2_top20 > 0.00326 and n_dr_0p2_0p4 ≤ 5.5` — 15.2% of jets, value 2.03 (1.38…2.53), formula right 91%
-- `mass ≤ 85.2 and girth2_top20 > 0.00326 and n_dr_0p2_0p4 > 5.5` — 7.4% of jets, value 1.14 (0.06…1.91), formula right 68%
-- `mass ≤ 85.2 and girth2_top20 ≤ 0.00326 and LHA > 0.173` — 9.0% of jets, value 0.79 (0.19…1.34), formula right 69%
-- `85.2 < mass ≤ 87.2` — 2.2% of jets, value 0.29 (0.00…0.81), formula right 71%
-- `mass ≤ 85.2 and girth2_top20 ≤ 0.00326 and LHA ≤ 0.173` — 20.9% of jets, value 0.25 (0.00…0.59), formula right 77%
-- `mass > 87.2 and mass_over_sum_pt ≤ 0.0807` — 2.0% of jets, value 0.07 (0.00…0.31), formula right 88%
-- `mass > 87.2 and mass_over_sum_pt > 0.0807` — 43.2% of jets, value 0.00 (0.00…0.00), formula right 84%
+- `` — 15.2% of jets, value 2.03 (1.38…2.53), formula right 91%
+- `` — 7.4% of jets, value 1.14 (0.06…1.91), formula right 68%
+- `` — 9.0% of jets, value 0.79 (0.19…1.34), formula right 69%
+- `` — 2.2% of jets, value 0.29 (0.00…0.81), formula right 71%
+- `` — 20.9% of jets, value 0.25 (0.00…0.59), formula right 77%
+- `` — 2.0% of jets, value 0.07 (0.00…0.31), formula right 88%
+- `` — 43.2% of jets, value 0.00 (0.00…0.00), formula right 84%
 
 ```
 z = 0.972
@@ -487,14 +487,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.752):
 
-- `lam2 ≤ 0.00034 and z_dr_0p2_0p4 ≤ 0.00105 and mass_over_sum_pt_sq ≤ 0.00721` — 6.7% of jets, value 2.00 (1.28…2.69), formula right 94%
-- `lam2 ≤ 0.00034 and z_dr_0p2_0p4 ≤ 0.00105 and mass_over_sum_pt_sq > 0.00721` — 2.3% of jets, value 1.27 (0.81…1.69), formula right 99%
-- `lam2 ≤ 0.00034 and z_dr_0p2_0p4 > 0.00105 and mass_over_sum_pt_sq ≤ 0.00682` — 14.8% of jets, value 1.19 (0.56…1.78), formula right 82%
-- `lam2 > 0.00034 and z_dr_0p2_0p4 ≤ 0.00165 and n_particles ≤ 46.5` — 2.8% of jets, value 1.13 (0.41…1.89), formula right 96%
-- `lam2 > 0.00034 and z_dr_0p2_0p4 ≤ 0.00165 and n_particles > 46.5` — 2.1% of jets, value 0.60 (0.00…1.38), formula right 92%
-- `lam2 > 0.00034 and z_dr_0p2_0p4 > 0.00165 and mass_over_sum_pt_sq ≤ 0.00354` — 13.2% of jets, value 0.48 (0.00…0.94), formula right 76%
-- `lam2 ≤ 0.00034 and z_dr_0p2_0p4 > 0.00105 and mass_over_sum_pt_sq > 0.00682` — 4.5% of jets, value 0.42 (0.00…0.91), formula right 94%
-- `lam2 > 0.00034 and z_dr_0p2_0p4 > 0.00165 and mass_over_sum_pt_sq > 0.00354` — 53.6% of jets, value 0.07 (0.00…0.25), formula right 78%
+- `` — 6.7% of jets, value 2.00 (1.28…2.69), formula right 94%
+- `` — 2.3% of jets, value 1.27 (0.81…1.69), formula right 99%
+- `` — 14.8% of jets, value 1.19 (0.56…1.78), formula right 82%
+- `` — 2.8% of jets, value 1.13 (0.41…1.89), formula right 96%
+- `` — 2.1% of jets, value 0.60 (0.00…1.38), formula right 92%
+- `` — 13.2% of jets, value 0.48 (0.00…0.94), formula right 76%
+- `` — 4.5% of jets, value 0.42 (0.00…0.91), formula right 94%
+- `` — 53.6% of jets, value 0.07 (0.00…0.25), formula right 78%
 
 ```
 z = -0.185
@@ -538,14 +538,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.657):
 
-- `mass_top50 ≤ 25.7` — 3.8% of jets, value 2.42 (2.12…2.62), formula right 85%
-- `25.7 < mass_top50 ≤ 36.3` — 6.4% of jets, value 2.05 (1.75…2.25), formula right 78%
-- `36.3 < mass_top50 ≤ 53.4 and n_dr_0p2_0p4 > 7.5` — 3.7% of jets, value 1.77 (1.38…2.06), formula right 74%
-- `mass_top50 > 53.4 and mass > 98.1 and lam2 ≤ 0.00235` — 11.9% of jets, value 1.63 (0.62…2.75), formula right 75%
-- `36.3 < mass_top50 ≤ 53.4 and n_dr_0p2_0p4 ≤ 7.5` — 6.6% of jets, value 1.43 (1.00…1.81), formula right 74%
-- `53.4 < mass_top50 ≤ 68.7 and mass ≤ 98.1` — 7.5% of jets, value 0.88 (0.38…1.31), formula right 68%
-- `mass_top50 > 53.4 and mass > 98.1 and lam2 > 0.00235` — 13.9% of jets, value 0.77 (0.00…1.88), formula right 85%
-- `mass_top50 > 68.7 and mass ≤ 98.1` — 46.2% of jets, value 0.13 (0.00…0.44), formula right 85%
+- `` — 3.8% of jets, value 2.42 (2.12…2.62), formula right 85%
+- `` — 6.4% of jets, value 2.05 (1.75…2.25), formula right 78%
+- `` — 3.7% of jets, value 1.77 (1.38…2.06), formula right 74%
+- `` — 11.9% of jets, value 1.63 (0.62…2.75), formula right 75%
+- `` — 6.6% of jets, value 1.43 (1.00…1.81), formula right 74%
+- `` — 7.5% of jets, value 0.88 (0.38…1.31), formula right 68%
+- `` — 13.9% of jets, value 0.77 (0.00…1.88), formula right 85%
+- `` — 46.2% of jets, value 0.13 (0.00…0.44), formula right 85%
 
 ```
 z = 0.607
@@ -601,14 +601,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.775):
 
-- `D2 ≤ 1.24 and mass_top50 > 86.5 and n_dr_0p2_0p4 ≤ 4.5` — 8.2% of jets, value 3.54 (2.06…5.06), formula right 97%
-- `D2 > 1.24 and 84.1 < mass ≤ 95.8` — 11.5% of jets, value 1.23 (0.06…2.56), formula right 82%
-- `D2 ≤ 1.24 and mass_top50 > 86.5 and n_dr_0p2_0p4 > 4.5` — 6.1% of jets, value 0.51 (0.00…2.00), formula right 78%
-- `D2 ≤ 1.24 and 82.4 < mass_top50 ≤ 86.5` — 2.0% of jets, value 0.49 (0.00…1.44), formula right 83%
-- `D2 > 1.24 and mass ≤ 84.1 and mass_top50 > 78.2` — 7.0% of jets, value 0.13 (0.00…0.50), formula right 83%
-- `D2 ≤ 1.24 and mass_top50 ≤ 82.4` — 9.2% of jets, value 0.06 (0.00…0.25), formula right 92%
-- `D2 > 1.24 and mass > 95.8` — 21.9% of jets, value 0.02 (0.00…0.00), formula right 81%
-- `D2 > 1.24 and mass ≤ 84.1 and mass_top50 ≤ 78.2` — 34.1% of jets, value 0.00 (0.00…0.00), formula right 74%
+- `` — 8.2% of jets, value 3.54 (2.06…5.06), formula right 97%
+- `` — 11.5% of jets, value 1.23 (0.06…2.56), formula right 82%
+- `` — 6.1% of jets, value 0.51 (0.00…2.00), formula right 78%
+- `` — 2.0% of jets, value 0.49 (0.00…1.44), formula right 83%
+- `` — 7.0% of jets, value 0.13 (0.00…0.50), formula right 83%
+- `` — 9.2% of jets, value 0.06 (0.00…0.25), formula right 92%
+- `` — 21.9% of jets, value 0.02 (0.00…0.00), formula right 81%
+- `` — 34.1% of jets, value 0.00 (0.00…0.00), formula right 74%
 
 ```
 z = -0.238
@@ -667,12 +667,12 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.871):
 
-- `mass_top50 ≤ 65.3 and sum_pt ≤ 937` — 2.5% of jets, value 4.06 (1.75…6.44), formula right 68%
-- `mass_top50 ≤ 65.3 and sum_pt > 937 and mass_top40 ≤ 44.6` — 15.6% of jets, value 2.69 (2.19…3.19), formula right 79%
-- `mass_top50 ≤ 65.3 and sum_pt > 937 and mass_top40 > 44.6` — 8.3% of jets, value 1.86 (1.25…2.44), formula right 71%
-- `65.3 < mass_top50 ≤ 71.7` — 3.1% of jets, value 0.91 (0.31…1.44), formula right 61%
-- `mass_top50 > 71.7 and girth2_top40 > 0.0142` — 18.6% of jets, value 0.33 (0.00…0.94), formula right 84%
-- `mass_top50 > 71.7 and girth2_top40 ≤ 0.0142` — 51.8% of jets, value 0.04 (0.00…0.06), formula right 84%
+- `` — 2.5% of jets, value 4.06 (1.75…6.44), formula right 68%
+- `` — 15.6% of jets, value 2.69 (2.19…3.19), formula right 79%
+- `` — 8.3% of jets, value 1.86 (1.25…2.44), formula right 71%
+- `` — 3.1% of jets, value 0.91 (0.31…1.44), formula right 61%
+- `` — 18.6% of jets, value 0.33 (0.00…0.94), formula right 84%
+- `` — 51.8% of jets, value 0.04 (0.00…0.06), formula right 84%
 
 ```
 z = -0.968
@@ -726,12 +726,12 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.659):
 
-- `mass ≤ 64.5 and C2 ≤ 0.0864 and sum_pt_top2 > 350` — 13.0% of jets, value 1.80 (1.25…2.38), formula right 78%
-- `mass > 64.5 and mass_top30 > 163` — 2.0% of jets, value 1.27 (0.00…4.25), formula right 84%
-- `mass ≤ 64.5 and C2 ≤ 0.0864 and sum_pt_top2 ≤ 350` — 8.0% of jets, value 1.26 (0.50…1.88), formula right 73%
-- `mass ≤ 64.5 and C2 > 0.0864` — 3.9% of jets, value 0.77 (0.00…1.38), formula right 71%
-- `64.5 < mass ≤ 74 and mass_top30 ≤ 163` — 4.7% of jets, value 0.50 (0.00…1.12), formula right 62%
-- `mass > 74 and mass_top30 ≤ 163` — 68.5% of jets, value 0.13 (0.00…0.38), formula right 84%
+- `` — 13.0% of jets, value 1.80 (1.25…2.38), formula right 78%
+- `` — 2.0% of jets, value 1.27 (0.00…4.25), formula right 84%
+- `` — 8.0% of jets, value 1.26 (0.50…1.88), formula right 73%
+- `` — 3.9% of jets, value 0.77 (0.00…1.38), formula right 71%
+- `` — 4.7% of jets, value 0.50 (0.00…1.12), formula right 62%
+- `` — 68.5% of jets, value 0.13 (0.00…0.38), formula right 84%
 
 ```
 z = 0.119
@@ -777,14 +777,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.765):
 
-- `sum_pt > 993 and mass ≤ 161 and log_sum_pt > 6.95` — 28.4% of jets, value 2.78 (2.22…3.28), formula right 82%
-- `sum_pt > 993 and mass ≤ 161 and log_sum_pt ≤ 6.95` — 40.9% of jets, value 2.10 (1.53…2.62), formula right 83%
-- `sum_pt ≤ 993 and log_sum_pt > 6.86 and mass_over_sum_pt ≤ 0.163` — 9.9% of jets, value 1.39 (0.69…2.06), formula right 73%
-- `sum_pt > 993 and mass > 161 and log_sum_pt > 6.95` — 3.6% of jets, value 1.18 (0.59…1.84), formula right 84%
-- `sum_pt > 993 and mass > 161 and log_sum_pt ≤ 6.95` — 4.2% of jets, value 0.74 (0.22…1.31), formula right 94%
-- `sum_pt ≤ 993 and 6.83 < log_sum_pt ≤ 6.86` — 4.1% of jets, value 0.59 (0.00…1.34), formula right 77%
-- `sum_pt ≤ 993 and log_sum_pt > 6.86 and mass_over_sum_pt > 0.163` — 2.2% of jets, value 0.28 (0.00…0.76), formula right 93%
-- `sum_pt ≤ 993 and log_sum_pt ≤ 6.83` — 6.7% of jets, value 0.15 (0.00…0.59), formula right 70%
+- `` — 28.4% of jets, value 2.78 (2.22…3.28), formula right 82%
+- `` — 40.9% of jets, value 2.10 (1.53…2.62), formula right 83%
+- `` — 9.9% of jets, value 1.39 (0.69…2.06), formula right 73%
+- `` — 3.6% of jets, value 1.18 (0.59…1.84), formula right 84%
+- `` — 4.2% of jets, value 0.74 (0.22…1.31), formula right 94%
+- `` — 4.1% of jets, value 0.59 (0.00…1.34), formula right 77%
+- `` — 2.2% of jets, value 0.28 (0.00…0.76), formula right 93%
+- `` — 6.7% of jets, value 0.15 (0.00…0.59), formula right 70%
 
 ```
 z = 2.37
@@ -839,14 +839,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.777):
 
-- `mass > 83.8 and mass_top40 > 104 and z_top50_slots ≤ 0.952` — 2.0% of jets, value 1.76 (0.75…3.00), formula right 76%
-- `mass > 87.4 and mass_top40 ≤ 104` — 23.5% of jets, value 1.67 (0.97…2.25), formula right 87%
-- `83.8 < mass ≤ 87.4 and mass_top40 ≤ 104` — 3.9% of jets, value 0.93 (0.34…1.56), formula right 70%
-- `79.8 < mass ≤ 83.8 and mass_over_sum_pt > 0.0809` — 2.0% of jets, value 0.53 (0.09…0.97), formula right 65%
-- `mass > 83.8 and mass_top40 > 104 and z_top50_slots > 0.952` — 19.6% of jets, value 0.28 (0.00…0.88), formula right 83%
-- `79.8 < mass ≤ 83.8 and mass_over_sum_pt ≤ 0.0809` — 9.2% of jets, value 0.21 (0.00…0.50), formula right 92%
-- `mass ≤ 79.8 and mass_over_sum_pt > 0.077` — 4.8% of jets, value 0.11 (0.00…0.31), formula right 84%
-- `mass ≤ 79.8 and mass_over_sum_pt ≤ 0.077` — 35.0% of jets, value 0.01 (0.00…0.00), formula right 75%
+- `` — 2.0% of jets, value 1.76 (0.75…3.00), formula right 76%
+- `` — 23.5% of jets, value 1.67 (0.97…2.25), formula right 87%
+- `` — 3.9% of jets, value 0.93 (0.34…1.56), formula right 70%
+- `` — 2.0% of jets, value 0.53 (0.09…0.97), formula right 65%
+- `` — 19.6% of jets, value 0.28 (0.00…0.88), formula right 83%
+- `` — 9.2% of jets, value 0.21 (0.00…0.50), formula right 92%
+- `` — 4.8% of jets, value 0.11 (0.00…0.31), formula right 84%
+- `` — 35.0% of jets, value 0.01 (0.00…0.00), formula right 75%
 
 ```
 z = 0.205
@@ -895,13 +895,13 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.513):
 
-- `sum_pt > 1.24e+03 and C2 > 0.07` — 2.0% of jets, value 2.17 (0.62…5.12), formula right 83%
-- `sum_pt > 1.24e+03 and C2 ≤ 0.07 and log_sum_pt > 7.2` — 2.0% of jets, value 1.46 (0.88…2.12), formula right 90%
-- `sum_pt > 1.24e+03 and C2 ≤ 0.07 and log_sum_pt ≤ 7.2` — 2.0% of jets, value 0.85 (0.50…1.12), formula right 86%
-- `sum_pt ≤ 1.24e+03 and sum_pt_top50 > 1.03e+03 and z_top30_slots > 0.963` — 23.2% of jets, value 0.56 (0.38…0.75), formula right 82%
-- `sum_pt ≤ 1.24e+03 and sum_pt_top50 > 1.03e+03 and z_top30_slots ≤ 0.963` — 12.5% of jets, value 0.34 (0.00…0.62), formula right 82%
-- `sum_pt ≤ 1.24e+03 and sum_pt_top50 ≤ 1.03e+03 and z_top30_slots > 0.96` — 32.0% of jets, value 0.32 (0.12…0.50), formula right 82%
-- `sum_pt ≤ 1.24e+03 and sum_pt_top50 ≤ 1.03e+03 and z_top30_slots ≤ 0.96` — 26.2% of jets, value 0.10 (0.00…0.25), formula right 78%
+- `` — 2.0% of jets, value 2.17 (0.62…5.12), formula right 83%
+- `` — 2.0% of jets, value 1.46 (0.88…2.12), formula right 90%
+- `` — 2.0% of jets, value 0.85 (0.50…1.12), formula right 86%
+- `` — 23.2% of jets, value 0.56 (0.38…0.75), formula right 82%
+- `` — 12.5% of jets, value 0.34 (0.00…0.62), formula right 82%
+- `` — 32.0% of jets, value 0.32 (0.12…0.50), formula right 82%
+- `` — 26.2% of jets, value 0.10 (0.00…0.25), formula right 78%
 
 ```
 z = 0.112
@@ -940,14 +940,14 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.775):
 
-- `z_dr_0p2_0p4 ≤ 0.00251 and girth2_top15 > 0.00345 and planar_flow ≤ 0.181` — 9.7% of jets, value 2.72 (1.81…3.69), formula right 97%
-- `z_dr_0p2_0p4 ≤ 0.00251 and girth2_top15 > 0.00345 and planar_flow > 0.181` — 6.4% of jets, value 1.97 (1.25…2.78), formula right 95%
-- `z_dr_0p2_0p4 > 0.00251 and D2 ≤ 1.24 and n_dr_0p2_0p4 ≤ 5.5` — 6.2% of jets, value 1.38 (0.56…2.25), formula right 90%
-- `z_dr_0p2_0p4 > 0.00251 and D2 > 1.24 and max_dr ≤ 0.265` — 3.0% of jets, value 0.80 (0.12…1.56), formula right 86%
-- `z_dr_0p2_0p4 ≤ 0.00251 and girth2_top15 ≤ 0.00345 and D2 > 3.45` — 2.6% of jets, value 0.68 (0.31…1.06), formula right 84%
-- `z_dr_0p2_0p4 > 0.00251 and D2 ≤ 1.24 and n_dr_0p2_0p4 > 5.5` — 6.2% of jets, value 0.47 (0.00…0.94), formula right 76%
-- `z_dr_0p2_0p4 ≤ 0.00251 and girth2_top15 ≤ 0.00345 and D2 ≤ 3.45` — 2.0% of jets, value 0.32 (0.00…1.13), formula right 79%
-- `z_dr_0p2_0p4 > 0.00251 and D2 > 1.24 and max_dr > 0.265` — 63.9% of jets, value 0.28 (0.00…0.62), formula right 77%
+- `` — 9.7% of jets, value 2.72 (1.81…3.69), formula right 97%
+- `` — 6.4% of jets, value 1.97 (1.25…2.78), formula right 95%
+- `` — 6.2% of jets, value 1.38 (0.56…2.25), formula right 90%
+- `` — 3.0% of jets, value 0.80 (0.12…1.56), formula right 86%
+- `` — 2.6% of jets, value 0.68 (0.31…1.06), formula right 84%
+- `` — 6.2% of jets, value 0.47 (0.00…0.94), formula right 76%
+- `` — 2.0% of jets, value 0.32 (0.00…1.13), formula right 79%
+- `` — 63.9% of jets, value 0.28 (0.00…0.62), formula right 77%
 
 ```
 z = -0.037
@@ -998,13 +998,13 @@ Groups of jets (every jet in one group; formed by how all its if-statements add 
 
 Regimes (a small tree on its quantities; R² 0.458):
 
-- `girth2_top5 ≤ 0.00404 and log_sum_pt ≤ 6.79` — 2.1% of jets, value 1.43 (0.56…2.44), formula right 66%
-- `girth2_top5 ≤ 0.00404 and log_sum_pt > 6.79 and sum_pt ≤ 1.04e+03` — 28.2% of jets, value 0.39 (0.00…0.88), formula right 74%
-- `girth2_top5 > 0.00404 and z_dr_0p1_0p2 ≤ 0.0806 and z_dr_0p05_0p1 ≤ 0.879` — 4.9% of jets, value 0.29 (0.00…0.75), formula right 84%
-- `girth2_top5 ≤ 0.00404 and log_sum_pt > 6.79 and sum_pt > 1.04e+03` — 23.2% of jets, value 0.14 (0.00…0.50), formula right 80%
-- `girth2_top5 > 0.00404 and 0.0806 < z_dr_0p1_0p2 ≤ 0.174` — 6.2% of jets, value 0.06 (0.00…0.25), formula right 85%
-- `girth2_top5 > 0.00404 and z_dr_0p1_0p2 ≤ 0.0806 and z_dr_0p05_0p1 > 0.879` — 3.9% of jets, value 0.06 (0.00…0.25), formula right 92%
-- `girth2_top5 > 0.00404 and z_dr_0p1_0p2 > 0.174` — 31.5% of jets, value 0.01 (0.00…0.00), formula right 86%
+- `` — 2.1% of jets, value 1.43 (0.56…2.44), formula right 66%
+- `` — 28.2% of jets, value 0.39 (0.00…0.88), formula right 74%
+- `` — 4.9% of jets, value 0.29 (0.00…0.75), formula right 84%
+- `` — 23.2% of jets, value 0.14 (0.00…0.50), formula right 80%
+- `` — 6.2% of jets, value 0.06 (0.00…0.25), formula right 85%
+- `` — 3.9% of jets, value 0.06 (0.00…0.25), formula right 92%
+- `` — 31.5% of jets, value 0.01 (0.00…0.00), formula right 86%
 
 ```
 z = -3.06
